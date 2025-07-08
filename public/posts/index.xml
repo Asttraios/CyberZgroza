@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Blowfish</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Blowfish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2025 </copyright>
+    <lastBuildDate>Tue, 08 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>5 narzędzi do pentestów</title>
+      <link>/posts/this-is-my-first-post-here/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/this-is-my-first-post-here/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>5 sposaobow nananaanan</title>
+      <link>/posts/windowscontent/</link>
+      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/windowscontent/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
