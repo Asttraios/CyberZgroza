@@ -20,6 +20,10 @@ enableEmoji = true
 
 [pagination]
   pagerSize = 100
+  
+#[params]  
+#  defaultTheme = "dark"
+#  disableThemeToggle = true
 
 [imaging]
   anchor = 'Center'

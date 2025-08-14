@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Blowfish</title>
-    <link>/tags/</link>
-    <description>Recent content in Tags on Blowfish</description>
+    <title>Tags on </title>
+    <link>http://localhost:1313/CyberZgroza/tags/</link>
+    <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2025 </copyright>
-    <lastBuildDate>Tue, 08 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>cyberzgroza@gmail.com (CyberZgroza)</managingEditor>
+    <webMaster>cyberzgroza@gmail.com (CyberZgroza)</webMaster>
+    <copyright>© 2025 CyberZgroza</copyright>
+    <lastBuildDate>Tue, 08 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Cyberbezpieczeństwo</title>
-      <link>/tags/cyberbezpiecze%C5%84stwo/</link>
+      <link>http://localhost:1313/CyberZgroza/tags/cyberbezpiecze%C5%84stwo/</link>
       <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/cyberbezpiecze%C5%84stwo/</guid>
+      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      <guid>http://localhost:1313/CyberZgroza/tags/cyberbezpiecze%C5%84stwo/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Narzędzia</title>
-      <link>/tags/narz%C4%99dzia/</link>
+      <link>http://localhost:1313/CyberZgroza/tags/narz%C4%99dzia/</link>
       <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/narz%C4%99dzia/</guid>
+      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      <guid>http://localhost:1313/CyberZgroza/tags/narz%C4%99dzia/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Pentesting</title>
-      <link>/tags/pentesting/</link>
+      <link>http://localhost:1313/CyberZgroza/tags/pentesting/</link>
       <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/pentesting/</guid>
+      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      <guid>http://localhost:1313/CyberZgroza/tags/pentesting/</guid>
       <description></description>
       
     </item>
