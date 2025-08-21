@@ -31,5 +31,12 @@ Wymiana podzespołów jest tak łatwa jak budowanie z klocków Lego. Nawet osoba
 Udostępniam też film pokazujący więcej szczegółów terminala.
 
 
-No dobra, ale co z ceną? Mi swojego udało się kupić za 268 zł na Allegro. Używanego. Także cena całkiem w porządku.
+No dobra, ale co z ceną? Mi swojego (używanego) udało się kupić za 268 zł na Allegro. Także  całkiem w porządku. Oczywiście są tańsze modele - warto jednak sprawdzić na ile możemy sobie pozwolić zmianę podzespołów. Może się zdarzyć, że maksymalnie możemy mieć np. 16 GB.
 
+## Hypervisor
+
+Kiedy już wybraliśmy mini-PC, musimy wybrać hypervisora, czyli menedżera odpowiedzialnego za zarządzanie maszynami wirtualnymi/kontenerami i przydzielanie im fizycznych zasobów. Wyróżniamy 2 typy:
+- Typ I
+- Typ II
+
+Typ I tzw. bare-metal charakteryzuje się tym, że działa bezpośrednio na sprzęcie fizycznym. Dzięki temu

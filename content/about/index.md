@@ -3,7 +3,7 @@ title: "O blogu słów kilka..."
 layout: "simple"
 draft: false
 ---
-{{< figure src="/images/autor.jpg" alt="autor" width="35%" >}}
+![[autor.JPG]]
 
 Cześć, nazywam się Krzysztof i studiuję cyberbezpieczeństwo na Politechnice Wrocławskiej. Blog, który teraz czytacie - "CyberZgroza" - to projekt, który stworzyłem jako pewna forma dokumentowania tego, czego ostatnio się dowiedziałem/nauczyłem z szeroko pojętego bezpieczeństwa IT i motywator do regularnej nauki. Uznałem, że fajnie będzie podzielić się tą wiedzą z innymi za darmochę i jednocześnie monitorować swój progres.
 
