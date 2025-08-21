@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on </title>
-    <link>http://localhost:1313/CyberZgroza/posts/</link>
-    <description>Recent content in Posts on </description>
+    <title>Homelab on </title>
+    <link>http://localhost:1313/CyberZgroza/tags/homelab/</link>
+    <description>Recent content in Homelab on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>cyberzgroza@gmail.com (CyberZgroza)</managingEditor>
     <webMaster>cyberzgroza@gmail.com (CyberZgroza)</webMaster>
     <copyright>© 2025 CyberZgroza</copyright>
-    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>5 narzędzi do pentestówww</title>
-      <link>http://localhost:1313/CyberZgroza/posts/this-is-my-first-post-here/</link>
-      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/posts/this-is-my-first-post-here/</guid>
-      <description></description>
-      
-    </item>
+    <lastBuildDate>Tue, 08 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Budowanie SIEM w Proxmox - Część I</title>
