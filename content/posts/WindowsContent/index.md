@@ -1,6 +1,6 @@
 ---
-title: 5 sposaobow nananaanan
-date: 2025-07-08
+title: 5 sposaobow naaaaaa
+date: 2025-08-21
 tags:
   - cyberbezpieczeństwo
 draft: false
@@ -11,6 +11,6 @@ draft: false
 
 a to zwykly tekst
 
-![Pasted-image-20250708174812](/images/Pasted-image-20250708174812.png)
+![[Pasted-image-20250708174812.png]]
 
 teraz testuję dodatkowy wpis - zobaczymy czy zadziała:oo
