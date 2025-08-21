@@ -9,6 +9,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://localhost:1313/CyberZgroza/posts/windowscontent/</loc>
+    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://localhost:1313/CyberZgroza/posts/</loc>
     <lastmod>2025-08-21T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
