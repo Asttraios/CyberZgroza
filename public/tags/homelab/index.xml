@@ -17,7 +17,7 @@
       <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
       <author>cyberzgroza@gmail.com (CyberZgroza)</author>
       <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab/</guid>
-      <description>Welcome to summary</description>
+      <description>Początek konfiguracji. Wybór hardware&amp;rsquo;u i hypervisora</description>
       
     </item>
     
@@ -27,7 +27,7 @@
       <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
       <author>cyberzgroza@gmail.com (CyberZgroza)</author>
       <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab2/</guid>
-      <description></description>
+      <description>Stworzenie topologii logicznej i konfiguracja VLAN-ów w pfSense</description>
       
     </item>
     
@@ -37,7 +37,7 @@
       <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
       <author>cyberzgroza@gmail.com (CyberZgroza)</author>
       <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab3/</guid>
-      <description></description>
+      <description>Instalacja i konfiguracja Security Onion. Port mirroring w Proxmox</description>
       
     </item>
     

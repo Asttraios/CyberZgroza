@@ -3,7 +3,7 @@ title: "Budowanie SIEM w Proxmox - Część I"
 date: 2025-09-02
 tags: ["blueteam", "siem", "homelab"]
 showSummary: true
-summary: "Początek konfiguracji. Wybór hardware'u i hypervisora"
+summary: "Początek konfiguracji. Wybór hardware\'u i hypervisora"
 draft: false
 ---
 
