@@ -4,31 +4,31 @@
 
   <url>
     <loc>http://localhost:1313/CyberZgroza/</loc>
-    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/CyberZgroza/posts/windowscontent/</loc>
-    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/CyberZgroza/posts/siem_homelab/</loc>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/CyberZgroza/posts/siem_homelab2/</loc>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/CyberZgroza/posts/siem_homelab3/</loc>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost:1313/CyberZgroza/posts/</loc>
-    <lastmod>2025-08-21T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://localhost:1313/CyberZgroza/posts/this-is-my-first-post-here/</loc>
-    <lastmod>2025-07-08T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://localhost:1313/CyberZgroza/posts/siem-homelab/</loc>
-    <lastmod>2025-07-08T00:00:00+00:00</lastmod>
+    <lastmod>2025-09-02T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>

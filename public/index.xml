@@ -9,35 +9,35 @@
     <managingEditor>cyberzgroza@gmail.com (CyberZgroza)</managingEditor>
     <webMaster>cyberzgroza@gmail.com (CyberZgroza)</webMaster>
     <copyright>© 2025 CyberZgroza</copyright>
-    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>5 sposaobow naaaaaa</title>
-      <link>http://localhost:1313/CyberZgroza/posts/windowscontent/</link>
-      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/posts/windowscontent/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>5 narzędzi do pentestówww</title>
-      <link>http://localhost:1313/CyberZgroza/posts/this-is-my-first-post-here/</link>
-      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/posts/this-is-my-first-post-here/</guid>
-      <description></description>
-      
-    </item>
+    <lastBuildDate>Tue, 02 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Budowanie SIEM w Proxmox - Część I</title>
-      <link>http://localhost:1313/CyberZgroza/posts/siem-homelab/</link>
-      <pubDate>Tue, 08 Jul 2025 00:00:00 +0000</pubDate>
+      <link>http://localhost:1313/CyberZgroza/posts/siem_homelab/</link>
+      <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
       <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/posts/siem-homelab/</guid>
-      <description></description>
+      <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab/</guid>
+      <description>Początek konfiguracji. Wybór hardware&amp;rsquo;u i hypervisora</description>
+      
+    </item>
+    
+    <item>
+      <title>Budowanie SIEM w Proxmox - Część II</title>
+      <link>http://localhost:1313/CyberZgroza/posts/siem_homelab2/</link>
+      <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab2/</guid>
+      <description>Stworzenie topologii logicznej i konfiguracja VLAN-ów w pfSense</description>
+      
+    </item>
+    
+    <item>
+      <title>Budowanie SIEM w Proxmox - Część III</title>
+      <link>http://localhost:1313/CyberZgroza/posts/siem_homelab3/</link>
+      <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
+      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab3/</guid>
+      <description>Instalacja i konfiguracja Security Onion. Port mirroring w Proxmox</description>
       
     </item>
     

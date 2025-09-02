@@ -1,0 +1,1657 @@
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="false"><head><script src="/CyberZgroza/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=CyberZgroza/livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Budowanie SIEM w Proxmox - Część III &middot; </title>
+  <meta name="title" content="Budowanie SIEM w Proxmox - Część III &middot; " />
+  
+  <meta name="description" content="My awesome website" />
+  <meta name="keywords" content="blueteam, siem, homelab, " />
+  
+  
+  <link rel="canonical" href="http://localhost:1313/CyberZgroza/posts/siem-homelab3/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/CyberZgroza/css/main.bundle.min.bb11319fc7f93e4c214d6df923be29dfbdf8003662fb2d8c9610e1783cadeafc1b81620d9df3a50a4de1098d328c5f3699c958c73af1bad46c6020c363147d00.css"
+    integrity="sha512-uxExn8f5PkwhTW35I74p3734ADZi&#43;y2MlhDheDyt6vwbgWINnfOlCk3hCY0yjF82mclYxzrxutRsYCDDYxR9AA==" />
+  
+  
+  <script type="text/javascript" src="/CyberZgroza/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/CyberZgroza/js/main.bundle.min.8c6b3c661facf9b6476acd8dd62042eee456bb8466da5e715de2615b7f7544c3ebef1d23c8d7c36c3863e61a7924ebfb1453d01b6ddb5779aa25effb4c331c8c.js"
+    integrity="sha512-jGs8Zh&#43;s&#43;bZHas2N1iBC7uRWu4Rm2l5xXeJhW391RMPr7x0jyNfDbDhj5hp5JOv7FFPQG23bV3mqJe/7TDMcjA==" data-copy="Copy" data-copied="Copied"></script>
+  
+  
+  
+  <script src="/CyberZgroza/lib/zoom/zoom.min.3530c2657381259433194af312ec3d322a97a2ad85661810299757fe793b24c3b8e07ab97fa8e5cf96cff1208f271e75394b6eaa56c2e39e7e2c3ca49fb1921c.js" integrity="sha512-NTDCZXOBJZQzGUrzEuw9MiqXoq2FZhgQKZdX/nk7JMO44Hq5f6jlz5bP8SCPJx51OUtuqlbC455&#43;LDykn7GSHA=="></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/CyberZgroza/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/CyberZgroza/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/CyberZgroza/favicon-16x16.png" />
+  <link rel="manifest" href="/CyberZgroza/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/CyberZgroza/posts/siem-homelab3/">
+  <meta property="og:title" content="Budowanie SIEM w Proxmox - Część III">
+  <meta property="og:description" content="My awesome website">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-27T00:00:00+00:00">
+    <meta property="article:tag" content="Blueteam">
+    <meta property="article:tag" content="Siem">
+    <meta property="article:tag" content="Homelab">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Budowanie SIEM w Proxmox - Część III">
+  <meta name="twitter:description" content="My awesome website">
+
+    
+  
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Budowanie SIEM w Proxmox - Część III",
+    "headline": "Budowanie SIEM w Proxmox - Część III",
+    
+    
+    "inLanguage": "en",
+    "url" : "http:\/\/localhost:1313\/CyberZgroza\/posts\/siem-homelab3\/",
+    "author" : {
+      "@type": "Person",
+      "name": "CyberZgroza"
+    },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-08-27T00:00:00\u002b00:00",
+    "datePublished": "2025-08-27T00:00:00\u002b00:00",
+    
+    "dateModified": "2025-08-27T00:00:00\u002b00:00",
+    
+    "keywords": ["blueteam","siem","homelab"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1578"
+  }]
+  </script>
+
+
+  
+  
+  <meta name="author" content="CyberZgroza" />
+  
+  
+  
+  
+  <link href="https://github.com/Asttraios" rel="me" />
+  
+  
+  
+  
+  <link href="https://linkedin.com/in/swiderskikrzysztof/" rel="me" />
+  
+  
+  
+  
+  
+
+<script src="/CyberZgroza/lib/jquery/jquery.slim.min.03cb160e3cfdb2667a2e2c80d283bebcf63ff8bbc4b629c9ab2babf6fae1d0c07ad470edae783efa4fabda2ac01c58d60e63b98b3c336be8208460f08f4354f5.js" integrity="sha512-A8sWDjz9smZ6LiyA0oO&#43;vPY/&#43;LvEtinJqyur9vrh0MB61HDtrng&#43;&#43;k&#43;r2irAHFjWDmO5izwza&#43;gghGDwj0NU9Q=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+  
+  
+  
+  <meta name="theme-color"/>
+  
+  
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a
+      >
+    </div>
+    
+    
+      <div class="min-h-[148px]"></div>
+<div
+  class="fixed inset-x-0 min-h-[130px] opacity-65 pl-[24px] pr-[24px] bg-gradient-to-b from-neutral from-60% dark:from-neutral-800 to-transparent mix-blend-normal z-index-80"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px] z-index-100">
+  <div
+    id="menu-blur"
+    class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
+  <div class="relative max-w-[64rem] ml-auto mr-auto">
+    <div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 padding-main-menu">
+    
+    
+    
+    <div>
+        <a href="/CyberZgroza/" class="flex">
+            <span class="sr-only"></span>
+
+            
+            <img src="/CyberZgroza/img/cyberzgroza_logo_tekst_bez_tla_256.png" width="128" height="128"
+                class="logo max-h-[5rem] max-w-[5rem] object-scale-down object-left nozoom" alt="" />
+            
+
+        </a>
+    </div>
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/CyberZgroza/" class="text-base font-medium text-gray-500 hover:text-gray-900"></a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a
+  href="/CyberZgroza/posts/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Posts">
+    Blog
+  </p>
+</a>
+
+
+
+            
+            
+  <a
+  href="/CyberZgroza/about/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="O blogu słów kilka...">
+    O mnie
+  </p>
+</a>
+
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+
+        </nav>
+        <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+
+        </div>
+    </div>
+    <div class="-my-2 md:hidden">
+
+        <label id="menu-button" class="block">
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 padding-top-[5px]">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li id="menu-close-button">
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+  <a
+    href="/CyberZgroza/posts/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Posts">
+      Blog
+    </p>
+  </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+  <a
+    href="/CyberZgroza/about/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="O blogu słów kilka...">
+      O mnie
+    </p>
+  </a>
+</li>
+
+
+
+
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+
+
+  </div>
+</div>
+
+
+<script
+  type="text/javascript"
+  src="/CyberZgroza/js/background-blur.min.4812321520cc2e4cd52bf9137015a55bb6c0b5e66a6b2c96b8654c0ec99be59e8e6425dd838a6fd9bac54000586f37f4a9680bbefaa2aee4601a69e188005cf6.js"
+  integrity="sha512-SBIyFSDMLkzVK/kTcBWlW7bAteZqayyWuGVMDsmb5Z6OZCXdg4pv2brFQABYbzf0qWgLvvqiruRgGmnhiABc9g=="
+  data-target-id="menu-blur"></script>
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+
+
+  <article>
+    
+
+
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Budowanie SIEM w Proxmox - Część III
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2025-08-27T00:00:00&#43;00:00">27 August 2025</time><span class="px-2 text-primary-500">&middot;</span><span>1578 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">8 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+  
+  
+
+
+
+      </div>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+        
+          
+          
+<div class="flex author">
+  
+    
+    
+      
+    
+    
+      
+        
+      
+      <img
+        class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4"
+        width="96"
+        height="96"
+        alt="CyberZgroza"
+        src="/CyberZgroza/img/cyberzgroza_logo_bez_tla_1024_hu_5f551b6c8415049c.png">
+    
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Author
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        CyberZgroza
+      </div>
+    
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/Asttraios"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://linkedin.com/in/swiderskikrzysztof/"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+        
+
+        
+
+        
+          <div class="mb-5"></div>
+        
+
+      
+
+    </header>
+
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+        <div class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+          <div
+            class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-[140px]
+            
+            ">
+            
+              <details
+  open
+  id="TOCView"
+  class="toc-right mt-0 overflow-y-auto overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#o-security-onion-słów-kilka">O Security Onion słów kilka</a></li>
+    <li><a href="#deployment-i-wymagania">Deployment i wymagania</a></li>
+    <li><a href="#instalacja">Instalacja</a></li>
+    <li><a href="#port-mirroring">Port mirroring</a></li>
+    <li><a href="#hookscript">Hookscript</a></li>
+    <li><a href="#posdumowanie">Posdumowanie</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#o-security-onion-słów-kilka">O Security Onion słów kilka</a></li>
+    <li><a href="#deployment-i-wymagania">Deployment i wymagania</a></li>
+    <li><a href="#instalacja">Instalacja</a></li>
+    <li><a href="#port-mirroring">Port mirroring</a></li>
+    <li><a href="#hookscript">Hookscript</a></li>
+    <li><a href="#posdumowanie">Posdumowanie</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+
+
+            
+            
+          </div>
+        </div>
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+
+
+        <div class="article-content max-w-prose mb-20">
+          <p>W ostatniej części miniserii o tworzeniu podstawowego SIEM-a przyjrzymy się szczegółom Security Onion oraz postawimy go w utworzonym labie.</p>
+
+<h2 class="relative group">O Security Onion słów kilka 
+    <div id="o-security-onion-słów-kilka" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#o-security-onion-s%c5%82%c3%b3w-kilka" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Security Onion</strong> można w dużym skrócie określić jako Kali Linux, tyle że dla Blue Teamu. W 2009 projekt został udostępniony publicznie za darmo przez Douga Burksa, weterana sił powietrznych Stanów Zjednoczonych. Security Onion jest <strong>darmową, open-source dystrybucją Linuxa, w której skład wchodzą preinstalowane narzędzia do m.in. intrusion prevention &amp; detection, monitorowania ruchu sieciowego, łatwego zbierania, zarządzania i analizowania logów, threat huntingu</strong>. Do ważnych funkcjonalności należą również:</p>
+<ul>
+<li>łatwy i szybki deploy</li>
+<li>analiza logów usług w chmurze</li>
+<li>korelacja zdarzeń</li>
+<li>dashboardy</li>
+<li>możliwość integracji z EDR (Endpoint Detection &amp; Response)</li>
+<li>możliwość tworzenia case&rsquo;ów</li>
+<li>Gotowy Playbook, czyli zestaw reguł i instrukcji pomagających szybciej zidentyfikować i zniwelować zagrożenie</li>
+</ul>
+<p>W arsenale security onion znajdziemy m.in.:</p>
+<ul>
+<li><strong>Suricata</strong> - NIDS &amp; NIPS, służy do wykrywania oraz blokowania szkodliwego ruchu sieciowego na podstawie sygnatur</li>
+<li><strong>Zeek</strong> - narzędzie do monitorowania ruchu sieciowego, zapewnia bardziej szczegółowe logi o przesłanych pakietach m.in. protokoły, żądania, sesje, pliki. Nie działa na podstawie sygnatur jak Suricata, ale w połączeniu dają pełniejszy obraz podejrzanego ruchu sieciowego</li>
+<li><strong>Strelka</strong> - system skanowania i analizy plików. Jego głównym zadaniem jest przetwarzanie plików wyodrębnionych z ruchu sieciowego lub innych źródeł i generowanie szczegółowych metadanych do analizy</li>
+<li><strong>Elastic Stack</strong> - Elasticsearch, Kibana, Logstash. Znana trójka do zbierania, analizowania, korelowania i zarządzania logami</li>
+<li><strong>Stenographer</strong> - przechwytywanie i analiza pakietów, wydajniejszy niż Wireshark w sieciach o dużej przepustowości</li>
+<li><strong>Elastic Agent</strong> - zastąpił Beatsy, agent endpointowy zbierający w czasie rzeczywistym logi systemowe, aplikacji, procesów.</li>
+<li><strong>Cyberchef</strong> - narzędzie do m.in. kodowania/dekodowania, szyfrowania/deszyfrowania danych</li>
+</ul>
+<p>Narzędzia wykorzystywane w Security Onion są open-source.</p>
+
+<h2 class="relative group">Deployment i wymagania 
+    <div id="deployment-i-wymagania" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#deployment-i-wymagania" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Jak wspominałem wyżej, jedną z kluczowych cech SO jest szybkość deploymentu i zautomatyzowana instalacja, nieróżniąca się poziomem skomplikowania od innych popularnych dystrybucji Linuxa. Security Onion możemy postawić na <strong>4 sposoby</strong>:</p>
+<ul>
+<li><strong>Import</strong> - w tym trybie nie ma możliwości monitorowania ruchu sieciowego na żywo. Można jedynie importować zrzuty PCAP do analizy</li>
+<li><strong>Evaluation</strong> - wersja demonstrująca możliwości narzędzia, nie jest przeznaczona do działania w produkcji</li>
+<li><strong>Standalone</strong> - samodzielna instancja Security Onion, w pełni gotowa do pracy w środowisku produkcyjnym. Monitoruje i analizuje ruch sieciowy na żywo. Wymaga dużo zasobów.</li>
+<li><strong>Distributed</strong> - rozproszona, pełna wersja, podzielona na nody. W pierwszej kolejności konfigurujemy node zarządzający, następnie dołączamy następne, pełniące różne funkcje.</li>
+</ul>
+<p>Oficjalne wymagania sprzętowe dla wersji Standalone:</p>
+<ul>
+<li><strong>4 CPU cores</strong></li>
+<li><strong>24 GB RAM</strong></li>
+<li><strong>Pamięć masowa min. 200 GB</strong></li>
+<li><strong>2 karty sieciowe</strong></li>
+</ul>
+<p>Jak na jedną maszynkę to dość sporo, dlatego w pierwszej części podkreślałem, że bardzo ważna jest modułowość mini-PC i możliwość zmiany komponentów. Obecnie mam 32 GB, ale spróbujemy przypisać tylko 20 GB RAM-u.</p>
+
+<h2 class="relative group">Instalacja 
+    <div id="instalacja" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#instalacja" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Pobieramy obraz z oficjalnej strony Security Onion i wrzucamy go do storage&rsquo;u w Proxmox tak samo jak w przypadku poprzednich maszyn. Przy stawianiu maszyny należy pamiętać, że <strong>potrzebuje dwóch interfejsów sieciowych</strong> - do zarządzania oraz do monitorowania ruchu sieciowego. Wybieramy połączenie ze switchem vmbr10 (nasz &ldquo;OVS Bridge&rdquo;). W przypadku interfejsu monitorującego wyłączamy firewall. Natomiast w konfiguracji interfejsu zarządzającego zaznaczamy, że ramki mają mieć przypisany tag 3 (VLAN 3 SIEM). Pamiętamy o przypisaniu odpowiedniej ilości zasobów.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="28_SO_hardware"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/28_SO_hardware_hu_897e4d99801d3ecb.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/28_SO_hardware_hu_b0c05496ab72887c.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/28_SO_hardware_hu_39a1c1918dba06e3.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/28_SO_hardware.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/28_SO_hardware.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="29_SO_firewall_off"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/29_SO_firewall_off_hu_4aa0954f9265896e.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/29_SO_firewall_off_hu_689c7968a074a44f.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/29_SO_firewall_off_hu_4082f01fcac97eb7.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/29_SO_firewall_off.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/29_SO_firewall_off.png">
+
+  
+</figure>
+</p>
+<p>Uruchamiamy maszynę wirtualną i przechodzimy przez prostą konfigurację. Poniżej wstawiam kilka ważniejszych ustawień.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="security_onion_welcome"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/security_onion_welcome_hu_13fc58a52625280f.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/security_onion_welcome_hu_a06b92af7911c418.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/security_onion_welcome_hu_ed1e974773d9ff44.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/security_onion_welcome.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/security_onion_welcome.png">
+
+  
+</figure>
+</p>
+<p>Wybieramy standardową instalację.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_standard_install"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_standard_install_hu_4d3054685fb444e.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_standard_install_hu_a83a31003244da45.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_standard_install_hu_bba687dcf5466df5.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_standard_install.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_standard_install.png">
+
+  
+</figure>
+</p>
+<p>Wybieramy wersję Standalone</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_standalone"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_standalone_hu_50e0122ca0ca91c5.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_standalone_hu_e3d9728d423755e.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_standalone_hu_e8d4bf3cd106a110.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_standalone.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_standalone.png">
+
+  
+</figure>
+</p>
+<p>W moim przypadku <strong>SIEM nie ma dostępu do Internetu</strong>. Wybieram opcję &ldquo;Airgap&rdquo;- w cyberbezpieczeństwie pojęcie to oznacza po prostu, że host jest fizycznie odizolowany od niezabezpieczonych sieci - w tym przypadku od Internetu. Jeśli będziemy chcieli w przyszłości zaktualizować SO wraz z regułami, wystarczy że wgramy nowy obraz ISO.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_airgrap"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_airgrap_hu_84eb16d6b5c3d934.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_airgrap_hu_1f6c1f0bc6a38231.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_airgrap_hu_28c8d9e36adc9686.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_airgrap.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_airgrap.png">
+
+  
+</figure>
+</p>
+<p>Wybieramy interfejs, który da nam dostęp do webowego panelu zarządzającego.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_managge_interface"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_managge_interface_hu_82f04651d824e914.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_managge_interface_hu_1b131362afb45590.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_managge_interface_hu_db9d6efa817bad3b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_managge_interface.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_managge_interface.png">
+
+  
+</figure>
+</p>
+<p>Przypisujemy adres IP w naszym VLAN-ie. Zdecydowałem się na 10.0.30.10/24</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_ip"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_ip_hu_8221dcdcc73ed9d.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_ip_hu_12a1a1d561c9001b.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_ip_hu_9c99556213a66f75.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_ip.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_ip.png">
+
+  
+</figure>
+</p>
+<p>Podajemy adres IP bramy domyślnej.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_def_gate"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_def_gate_hu_880c5c56490dd130.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_def_gate_hu_9cf76d5761c79669.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_def_gate_hu_6b3a5b6e4844039a.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_def_gate.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_def_gate.png">
+
+  
+</figure>
+</p>
+<p>Domenę DNS zostawiam domyślną.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_domain"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_domain_hu_386820f0b19f7f32.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_domain_hu_3a2aaff5f5643bce.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_domain_hu_342f07547e0951b3.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_domain.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_domain.png">
+
+  
+</figure>
+</p>
+<p>Wpisujemy adres e-mail do logowania się do panelu webowego oraz do Kibany. Nie musi być prawdziwy.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_email"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_email_hu_6b0e28e30788fd3b.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_email_hu_7815a1ddc74a9251.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_email_hu_eac1df0d13640905.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_email.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_email.png">
+
+  
+</figure>
+</p>
+<p>Jako metodę dostępu do panelu webowego wybrałem adres IP.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_web_ip_access"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_web_ip_access_hu_1f0c93980120dbf7.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_web_ip_access_hu_36e69cbe0846667.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_web_ip_access_hu_efc38e276f51c5e2.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_web_ip_access.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_web_ip_access.png">
+
+  
+</figure>
+</p>
+<p>Teraz wskażemy sieć VLAN 1 (Management), żebyśmy mogli z niej uzyskać dostęp do panelu webowego. Z żadnego innego VLAN-a nie dostaniemy się do niego.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_web_access_external"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_web_access_external_hu_f3229ef9f7277913.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_web_access_external_hu_3605b30450f0b847.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_web_access_external_hu_8a71a80b660997e3.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_web_access_external.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_web_access_external.png">
+
+  
+</figure>
+</p>
+<p>Podsumowanie naszych wyborów.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_agree"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_agree_hu_f5c235f49a4a25e1.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_agree_hu_5d5a78aaf790f0e8.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_agree_hu_b3181638633d1c88.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_agree.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_agree.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_ready_to_boot"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_ready_to_boot_hu_3c54c7711067af09.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_ready_to_boot_hu_37a05e020174ab6f.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_ready_to_boot_hu_18bb09e0ebc662e8.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_ready_to_boot.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_ready_to_boot.png">
+
+  
+</figure>
+</p>
+<p>Po wpisaniu adresu IP hosta Security Onion w przeglądarkę na Red Hat (VLAN 1), ukazuje nam się panel logowania. Wpisujemy wcześniej podany e-mail i utoworzone hasło.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="sec_onion_first_login"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_first_login_hu_e5b4422a2082ab7d.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_first_login_hu_3fe809a3e442a15e.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/sec_onion_first_login_hu_c7bd09e2de89262d.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_first_login.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/sec_onion_first_login.png">
+
+  
+</figure>
+</p>
+<p>Sukces! Właśnie postawiliśmy świeżego Security Onion. Jak możecie zauważyć mamy naprawdę sporo logów, dashboardów i zakładek.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="security_onion_ready"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/security_onion_ready_hu_927bdf863bc361e1.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/security_onion_ready_hu_cc6f3a6236e82f8e.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/security_onion_ready_hu_e495baafac44420c.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/security_onion_ready.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/security_onion_ready.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Port mirroring 
+    <div id="port-mirroring" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#port-mirroring" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Do poprawnego działania SO została nam jeszcze tylko jedna ważna rzecz do skonfigurowania - port mirroring. Jest to <strong>funkcja przełączników (w naszym przypadku Open vSwitch), która pozwala na kopiowanie ruchu z jednego lub wielu interfejsów do interfejsu docelowego w celu analizy tego ruchu</strong>. Tym interfejsem docelowym jest interfejs monitorujący w Security Onion. W terminalu Proxmoxa skonfigurujemy go ręcznie, ponieważ ta funkcja nie jest domyślnie włączona gdy wskazujemy interfejs monitorujący podczas instalacji SO.</p>
+<p>W shellu Proxmoxa wpisujemy polecenie &ldquo;ip a&rdquo;, aby zobaczyć wszystkie interfejsy w Proxmox, również te wirtualne. Szukamy interfejsu tap103i1 (103 to ID maszyny wirtualnej SO, i1 to interfejs nr. 1, czyli monitorujący).</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="tap_interface"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/tap_interface_hu_6cda4463797d696d.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/tap_interface_hu_cadcddee495685b5.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/tap_interface_hu_6cc73bcc6bc5140a.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/tap_interface.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/tap_interface.png">
+
+  
+</figure>
+</p>
+<p>Wpisujemy teraz polecenie ustawiające ten interfejs jako odbiorca mirrorowanego ruchu.</p>
+<p><strong><code>-- --id=@p get port tap103i1</code></strong></p>
+<ul>
+<li>
+<p>Pobieramy obiekt portu <code>tap103i1</code></p>
+</li>
+<li>
+<p>Nadajemy mu alias <code>@p</code>, żeby łatwiej się do niego odwoływać.</p>
+</li>
+</ul>
+<p><strong><code>-- --id=@m create mirror name=siemspan select-all=true output-port=@p</code></strong></p>
+<ul>
+<li>
+<p>Tworzymy nowy obiekt typu <strong>Mirror</strong> o nazwie <code>siemspan</code>.</p>
+</li>
+<li>
+<p><code>select-all=true</code> - mirror obejmuje <strong>cały ruch</strong> na switchu.</p>
+</li>
+<li>
+<p><code>output-port=@p</code> - cały ten sklonowany ruch zostanie wysłany do portu monitorującego <code>tap103i1</code></p>
+</li>
+</ul>
+<p><strong><code>-- set bridge vmbr10 mirrors=@m</code></strong></p>
+<ul>
+<li>
+<p>Do bridge’a <code>vmbr10</code> przypisujemy właśnie utworzony mirror <code>@m</code>.</p>
+</li>
+<li>
+<p>Dzięki temu ruch z bridge’a zaczyna być kopiowany zgodnie z regułami, które podałeś w punkcie 2.</p>
+</li>
+</ul>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="proxmox_port_mirroring_command"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/proxmox_port_mirroring_command_hu_23d316ad3c5ff268.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/proxmox_port_mirroring_command_hu_991412aba15e595a.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/proxmox_port_mirroring_command_hu_a5337187ea0dcd0d.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/proxmox_port_mirroring_command.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/proxmox_port_mirroring_command.png">
+
+  
+</figure>
+</p>
+<p>Jest tylko jedno ALE. Port mirroring nie jest trwały i po <strong>wyłączeniu</strong> hosta Proxmoxa lub samej maszyny Security Onion trzeba wpisać polecenie na nowo (po reboocie SO port mirroring nadal działa). Czemu tak się dzieje? Okazuje się, że konfiguracja port mirroringu wprowadzona poleceniem <code>ovs-vsctl</code> zapisywana jest w <strong>OVSDB</strong> (baza danych Open vSwitch) tylko wtedy, gdy obiekt (np. port lub bridge) faktycznie istnieje w danej chwili. Gdy host Proxmox zostanie zrestartowany, wszystkie dynamiczne interfejsy typu &rsquo;tap&rsquo; znikają i pojawiają się ponownie dopiero w momencie startu maszyn wirtualnych. Ponieważ mirroring w OVS jest powiązany nie z samą nazwą interfejsu (tap103i1), ale z jego <strong>UUID</strong>, po starcie hosta OVS „gubi” ten obiekt i mirror przestaje działać.</p>
+<p>Natomiast <strong>zwykły reboot Security Onion nie powoduje zmian</strong> - port mirroring nadal działa. Problem pojawia się dopiero wtedy, gdy OVS sam jest restartowany (np. wraz z całym hostem). Poniżej wylistowałem dane interfejsu monitorującego, do którego spływa ruch sieciowy. Widać na nim aktualne UUID. Po wpisaniu polecenia &lsquo;reboot&rsquo; w shellu Security Onion, UUID pozostaje bez zmian.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="tap_uuid_1"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/tap_uuid_1_hu_b208d709bb7f5847.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/tap_uuid_1_hu_f5f58d449e6cf336.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/tap_uuid_1_hu_3ea90fd1d264d6a2.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/tap_uuid_1.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/tap_uuid_1.png">
+
+  
+</figure>
+</p>
+<p>Sprawdźmy jednak co się stanie, gdy wymusimy wyłączenie maszyny poprzez przycisk &lsquo;Shutdown&rsquo; w panelu Proxmox.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="tap_uuid_2"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/tap_uuid_2_hu_cea009676e817893.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/tap_uuid_2_hu_173604278fdd5cbe.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/tap_uuid_2_hu_6931b9d6e474e199.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/tap_uuid_2.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/tap_uuid_2.png">
+
+  
+</figure>
+</p>
+<p>Jak widać sama nazwa interfejsu pozostaje bez zmian, ale zmieniło się UUID. Jak napisałem wcześniej, <strong>OVS &ldquo;skupia się&rdquo; na UUID, nie nazwie. Stąd port mirroring nie działa, bo teoretycznie interfejs, na którym działał pierwotnie, nie istnieje.</strong></p>
+<p>Za pomocą tcpdump sprawdźmy czy interfejs monitorujący otrzymuje kopię ruchu sieciowego. Wyślemy pinga z testowej maszyny RedHat (VLAN 1) do maszyny Xubuntu (VLAN 2).</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="redhat_xubuntu_ping"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/redhat_xubuntu_ping_hu_48faf529bcaa58d1.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/redhat_xubuntu_ping_hu_d505eca763d552e0.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/redhat_xubuntu_ping_hu_8c651ce86abbefea.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/redhat_xubuntu_ping.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/redhat_xubuntu_ping.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="SO_listening_interface_test"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/SO_listening_interface_test_hu_522490f90dfd109a.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/SO_listening_interface_test_hu_3aa01d1e042c363b.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/SO_listening_interface_test_hu_a85235315707aebe.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/SO_listening_interface_test.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/SO_listening_interface_test.png">
+
+  
+</figure>
+</p>
+<p>Faktycznie - nic się nie pojawiło. Wpiszmy ponownie na hoście Proxmoxa polecenie konfigurujące port mirroring i sprawdźmy, czy tym razem odbieramy skopiowany ruch sieciowy.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="second_redhat_xubuntu_ping"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/second_redhat_xubuntu_ping_hu_b8071d61dd4c6ede.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/second_redhat_xubuntu_ping_hu_f19fdaeb85b662f9.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/second_redhat_xubuntu_ping_hu_3f16db3b40c5ef2d.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/second_redhat_xubuntu_ping.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/second_redhat_xubuntu_ping.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="so_tcpdump_pings"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/so_tcpdump_pings_hu_488c1118004aff5c.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/so_tcpdump_pings_hu_21452fb5e0a20fe7.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/so_tcpdump_pings_hu_ecbf59f6ac5716f4.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/so_tcpdump_pings.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/so_tcpdump_pings.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Hookscript 
+    <div id="hookscript" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#hookscript" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Jak widać, tym razem wszystko działa poprawnie. No dobra, ale czy serio będziemy wpisywać to polecenie ręcznie? Na szczęście Proxmox ma <strong>możliwość tworzenia hookscriptów, czyli skryptów które są wykonywane w określonym momencie życia maszyny wirtulanej</strong> (tuż przed startem, zaraz po starcie, tuż przed zatrzymaniem, zaraz po zatrzymaniu).  Nasze polecenie zostanie uruchomione w fazie zaraz po starcie, a zaraz po zatrzymaniu usuniemy zbędne mirrory związane z bridgem vmbr10. Proxmox wykonuje skrypt podczas każdej z faz z dwoma argumantami - ID maszyny oraz faza jej życia. Np. <code>/var/lib/vz/snippets/so-mirror-hook.sh 201 pre-start</code></p>
+<pre tabindex="0"><code># Tworzymy katalog w /var/lib/vz o nazwie snippets
+
+mkdir /var/lib/vz/snippets
+
+# Tworzymy hookscript w nowym katalogu. Możemy skorzystać z przykładowego 
+# /usr/share/pve-docs/examples/guest-example-hookscript.pl
+
+nano /var/lib/vz/snippets/portmirror_hookscript.pl
+
+# Dodajemy uprawnienie pozwalające na wykonanie
+
+chmod +x /var/lib/vz/snippets/portmirror_hookscript.pl
+
+# Przypisujemy go do maszyny wirtualnej Security Onion
+
+qm set 103 --hookscript local:snippets/portmirror_hookscript.pl
+</code></pre><p>Skrypt:</p>
+<pre tabindex="0"><code>#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+print &#34;GUEST HOOK: &#34; . join(&#39; &#39;, @ARGV). &#34;\n&#34;;
+
+my $vmid  = shift;   
+my $phase = shift;   
+
+if ($phase eq &#39;pre-start&#39;) {
+    print &#34;$vmid is starting, doing preparations.\n&#34;;
+
+} elsif ($phase eq &#39;post-start&#39;) {
+    print &#34;$vmid started successfully.\n&#34;;
+
+    if ($vmid == 103) {
+        print &#34;Configuring port mirror for Security Onion (VM $vmid)...\n&#34;;
+
+        my $cmd = &#34;ovs-vsctl &#34; .
+                  &#34;-- --id=\@p get Port tap${vmid}i1 &#34; .
+                  &#34;-- --id=\@m create Mirror name=siemspan select-all=true output-port=\@p &#34; .
+                  &#34;-- set Bridge vmbr10 mirrors=\@m&#34;;
+
+        system($cmd) == 0
+            or warn &#34;Failed to execute ovs-vsctl command: $!\n&#34;;
+    }
+
+} elsif ($phase eq &#39;pre-stop&#39;) {
+    print &#34;$vmid will be stopped.\n&#34;;
+
+} elsif ($phase eq &#39;post-stop&#39;) {
+    print &#34;$vmid stopped. Doing cleanup.\n&#34;;
+
+    if ($vmid == 103) {
+        print &#34;Removing port mirror for Security Onion (VM $vmid)...\n&#34;;
+        system(&#34;ovs-vsctl clear Bridge vmbr10 mirrors&#34;) == 0
+            or warn &#34;Failed to remove mirror: $!\n&#34;;
+    }
+
+} else {
+    die &#34;got unknown phase &#39;$phase&#39;\n&#34;;
+}
+</code></pre><p>Wyłączymy i włączymy ponownie Security Onion i sprawdzimy za pomocą tcpdump, czy skopiowany ruch jest odbierany.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="os_hookscript"
+    srcset="
+      /CyberZgroza/posts/siem-homelab3/images/os_hookscript_hu_2f7067868885f88b.png  330w,
+      /CyberZgroza/posts/siem-homelab3/images/os_hookscript_hu_b88e214ef0776db.png  660w,
+      /CyberZgroza/posts/siem-homelab3/images/os_hookscript_hu_4610b857f7d3e632.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/siem-homelab3/images/os_hookscript.png"
+    src="/CyberZgroza/posts/siem-homelab3/images/os_hookscript.png">
+
+  
+</figure>
+</p>
+<p>Jak widać działa - <strong>udało nam się zautomatyzować poprawnie działający port mirroring</strong>. Dzięki temu cały ruch sieciowy między VLAN-ami będzie mógł być analizowany.</p>
+
+<h2 class="relative group">Posdumowanie 
+    <div id="posdumowanie" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#posdumowanie" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>W tej trzyczęściowej serii stworzyliśmy szkielet infrastruktury naszego <strong>laboratorium SOC</strong>. Postawiliśmy i skonfigurowaliśmy <strong>Security Onion</strong> oraz zautomatyzowaliśmy funkcję <strong>port mirroringu</strong>. Hookscript dodatkowo usuwa mirrory po wyłączeniu maszyny. Mamy już solidne podstawy, aby zagłębić się w działania Security Onion i tworzyć własne symulowane ataki i na nie reagować. Ale o tym w przyszłych wpisach. Jeśli dotarłeś/aś do końca, to bardzo dziękuję za przeczytanie i mam nadzieję, że w jakiś sposób pomogłem Ci w poprawnej konfiguracji Security Onion.</p>
+
+          
+          
+          
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/CyberZgroza/js/page.min.407e5b2727c1f241c95d53db24c776bea71bfc18e09511b815d669ad8caca6e9e18a53864ad364b1ccccfa2f2956768d33cfe193bfb64d3406f3b5ece354ba57.js"
+          integrity="sha512-QH5bJyfB8kHJXVPbJMd2vqcb/BjglRG4FdZprYyspunhilOGStNksczM&#43;i8pVnaNM8/hk7&#43;2TTQG87Xs41S6Vw=="
+          data-oid="views_posts\SIEM Homelab3\index.md"
+          data-oid-likes="likes_posts\SIEM Homelab3\index.md"></script>
+      
+
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+
+
+      
+    </footer>
+  </article>
+
+        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a
+    href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top"
+    title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2025
+          CyberZgroza
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+      </p>
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script> 
+  
+  <script
+    type="text/javascript"
+    src="/CyberZgroza/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-index-500"
+  data-url="http://localhost:1313/CyberZgroza/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)">
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>
