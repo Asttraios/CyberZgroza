@@ -1,0 +1,2180 @@
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="false"><head><script src="/CyberZgroza/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=CyberZgroza/livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Hack The Box Sherlock - i-like-to &middot; </title>
+  <meta name="title" content="Hack The Box Sherlock - i-like-to &middot; " />
+  
+  <meta name="description" content="Analiza Sherlocka &#34;i-like-to&#34; z HTB" />
+  <meta name="keywords" content="blueteam, siem, homelab, " />
+  
+  
+  <link rel="canonical" href="http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/CyberZgroza/css/main.bundle.min.bb11319fc7f93e4c214d6df923be29dfbdf8003662fb2d8c9610e1783cadeafc1b81620d9df3a50a4de1098d328c5f3699c958c73af1bad46c6020c363147d00.css"
+    integrity="sha512-uxExn8f5PkwhTW35I74p3734ADZi&#43;y2MlhDheDyt6vwbgWINnfOlCk3hCY0yjF82mclYxzrxutRsYCDDYxR9AA==" />
+  
+  
+  <script type="text/javascript" src="/CyberZgroza/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/CyberZgroza/js/main.bundle.min.8c6b3c661facf9b6476acd8dd62042eee456bb8466da5e715de2615b7f7544c3ebef1d23c8d7c36c3863e61a7924ebfb1453d01b6ddb5779aa25effb4c331c8c.js"
+    integrity="sha512-jGs8Zh&#43;s&#43;bZHas2N1iBC7uRWu4Rm2l5xXeJhW391RMPr7x0jyNfDbDhj5hp5JOv7FFPQG23bV3mqJe/7TDMcjA==" data-copy="Copy" data-copied="Copied"></script>
+  
+  
+  
+  <script src="/CyberZgroza/lib/zoom/zoom.min.3530c2657381259433194af312ec3d322a97a2ad85661810299757fe793b24c3b8e07ab97fa8e5cf96cff1208f271e75394b6eaa56c2e39e7e2c3ca49fb1921c.js" integrity="sha512-NTDCZXOBJZQzGUrzEuw9MiqXoq2FZhgQKZdX/nk7JMO44Hq5f6jlz5bP8SCPJx51OUtuqlbC455&#43;LDykn7GSHA=="></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/CyberZgroza/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/CyberZgroza/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/CyberZgroza/favicon-16x16.png" />
+  <link rel="manifest" href="/CyberZgroza/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/">
+  <meta property="og:title" content="Hack The Box Sherlock - i-like-to">
+  <meta property="og:description" content="Analiza Sherlocka “i-like-to” z HTB">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-09-07T00:00:00+00:00">
+    <meta property="article:tag" content="Blueteam">
+    <meta property="article:tag" content="Siem">
+    <meta property="article:tag" content="Homelab">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hack The Box Sherlock - i-like-to">
+  <meta name="twitter:description" content="Analiza Sherlocka “i-like-to” z HTB">
+
+    
+  
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Hack The Box Sherlock - i-like-to",
+    "headline": "Hack The Box Sherlock - i-like-to",
+    
+    "abstract": "Analiza Sherlocka \u0026ldquo;i-like-to\u0026rdquo; z HTB",
+    "inLanguage": "en",
+    "url" : "http:\/\/localhost:1313\/CyberZgroza\/posts\/htb_sherlock_intro_to_blue_4\/",
+    "author" : {
+      "@type": "Person",
+      "name": "CyberZgroza"
+    },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-09-07T00:00:00\u002b00:00",
+    "datePublished": "2025-09-07T00:00:00\u002b00:00",
+    
+    "dateModified": "2025-09-07T00:00:00\u002b00:00",
+    
+    "keywords": ["blueteam","siem","homelab"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1684"
+  }]
+  </script>
+
+
+  
+  
+  <meta name="author" content="CyberZgroza" />
+  
+  
+  
+  
+  <link href="https://github.com/Asttraios" rel="me" />
+  
+  
+  
+  
+  <link href="https://linkedin.com/in/swiderskikrzysztof/" rel="me" />
+  
+  
+  
+  
+  
+
+<script src="/CyberZgroza/lib/jquery/jquery.slim.min.03cb160e3cfdb2667a2e2c80d283bebcf63ff8bbc4b629c9ab2babf6fae1d0c07ad470edae783efa4fabda2ac01c58d60e63b98b3c336be8208460f08f4354f5.js" integrity="sha512-A8sWDjz9smZ6LiyA0oO&#43;vPY/&#43;LvEtinJqyur9vrh0MB61HDtrng&#43;&#43;k&#43;r2irAHFjWDmO5izwza&#43;gghGDwj0NU9Q=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+  
+  
+  
+  <meta name="theme-color"/>
+  
+  
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content"
+        ><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a
+      >
+    </div>
+    
+    
+      <div class="min-h-[148px]"></div>
+<div
+  class="fixed inset-x-0 min-h-[130px] opacity-65 pl-[24px] pr-[24px] bg-gradient-to-b from-neutral from-60% dark:from-neutral-800 to-transparent mix-blend-normal z-index-80"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px] z-index-100">
+  <div
+    id="menu-blur"
+    class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
+  <div class="relative max-w-[64rem] ml-auto mr-auto">
+    <div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 padding-main-menu">
+    
+    
+    
+    <div>
+        <a href="/CyberZgroza/" class="flex">
+            <span class="sr-only"></span>
+
+            
+            <img src="/CyberZgroza/img/cyberzgroza_logo_tekst_bez_tla_256.png" width="128" height="128"
+                class="logo max-h-[5rem] max-w-[5rem] object-scale-down object-left nozoom" alt="" />
+            
+
+        </a>
+    </div>
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/CyberZgroza/" class="text-base font-medium text-gray-500 hover:text-gray-900"></a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a
+  href="/CyberZgroza/posts/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Posts">
+    Blog
+  </p>
+</a>
+
+
+
+            
+            
+  <a
+  href="/CyberZgroza/about/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="O blogu słów kilka...">
+    O mnie
+  </p>
+</a>
+
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+
+        </nav>
+        <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+
+        </div>
+    </div>
+    <div class="-my-2 md:hidden">
+
+        <label id="menu-button" class="block">
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 padding-top-[5px]">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li id="menu-close-button">
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+  <a
+    href="/CyberZgroza/posts/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Posts">
+      Blog
+    </p>
+  </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+  <a
+    href="/CyberZgroza/about/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="O blogu słów kilka...">
+      O mnie
+    </p>
+  </a>
+</li>
+
+
+
+
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+
+
+  </div>
+</div>
+
+
+<script
+  type="text/javascript"
+  src="/CyberZgroza/js/background-blur.min.4812321520cc2e4cd52bf9137015a55bb6c0b5e66a6b2c96b8654c0ec99be59e8e6425dd838a6fd9bac54000586f37f4a9680bbefaa2aee4601a69e188005cf6.js"
+  integrity="sha512-SBIyFSDMLkzVK/kTcBWlW7bAteZqayyWuGVMDsmb5Z6OZCXdg4pv2brFQABYbzf0qWgLvvqiruRgGmnhiABc9g=="
+  data-target-id="menu-blur"></script>
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+
+
+  <article>
+    
+
+
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Hack The Box Sherlock - i-like-to
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2025-09-07T00:00:00&#43;00:00">7 September 2025</time><span class="px-2 text-primary-500">&middot;</span><span>1684 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">8 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+  
+  
+
+
+
+      </div>
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+        
+          
+          
+<div class="flex author">
+  
+    
+    
+      
+    
+    
+      
+        
+      
+      <img
+        class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4"
+        width="96"
+        height="96"
+        alt="CyberZgroza"
+        src="/CyberZgroza/img/cyberzgroza_logo_bez_tla_1024_hu_5f551b6c8415049c.png">
+    
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Author
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        CyberZgroza
+      </div>
+    
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/Asttraios"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://linkedin.com/in/swiderskikrzysztof/"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+        
+
+        
+
+        
+          <div class="mb-5"></div>
+        
+
+      
+
+    </header>
+
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+        <div class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+          <div
+            class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-[140px]
+            
+            ">
+            
+              <details
+  open
+  id="TOCView"
+  class="toc-right mt-0 overflow-y-auto overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pytanie-1">Pytanie 1</a></li>
+    <li><a href="#pytanie-2">Pytanie 2</a></li>
+    <li><a href="#pytanie-3">Pytanie 3</a></li>
+    <li><a href="#pytanie-4">Pytanie 4</a></li>
+    <li><a href="#pytanie-5">Pytanie 5</a></li>
+    <li><a href="#pytanie-6">Pytanie 6</a></li>
+    <li><a href="#pytanie-7">Pytanie 7</a></li>
+    <li><a href="#pytanie-8">Pytanie 8</a></li>
+    <li><a href="#pytanie-9">Pytanie 9</a></li>
+    <li><a href="#pytanie-10">Pytanie 10</a></li>
+    <li><a href="#pytanie-11">Pytanie 11</a></li>
+    <li><a href="#pytanie-12">Pytanie 12</a></li>
+    <li><a href="#pytanie-13">Pytanie 13</a></li>
+    <li><a href="#pytanie-14">Pytanie 14</a></li>
+    <li><a href="#podsumowanie">Podsumowanie</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#pytanie-1">Pytanie 1</a></li>
+    <li><a href="#pytanie-2">Pytanie 2</a></li>
+    <li><a href="#pytanie-3">Pytanie 3</a></li>
+    <li><a href="#pytanie-4">Pytanie 4</a></li>
+    <li><a href="#pytanie-5">Pytanie 5</a></li>
+    <li><a href="#pytanie-6">Pytanie 6</a></li>
+    <li><a href="#pytanie-7">Pytanie 7</a></li>
+    <li><a href="#pytanie-8">Pytanie 8</a></li>
+    <li><a href="#pytanie-9">Pytanie 9</a></li>
+    <li><a href="#pytanie-10">Pytanie 10</a></li>
+    <li><a href="#pytanie-11">Pytanie 11</a></li>
+    <li><a href="#pytanie-12">Pytanie 12</a></li>
+    <li><a href="#pytanie-13">Pytanie 13</a></li>
+    <li><a href="#pytanie-14">Pytanie 14</a></li>
+    <li><a href="#podsumowanie">Podsumowanie</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+
+
+            
+            
+          </div>
+        </div>
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+
+
+        <div class="article-content max-w-prose mb-20">
+          <p>Przyjrzymy się dzisiaj pewnemu incydentowi, który miał miejsce na serwerze Windows. Dostaliśmy następujące informacje:</p>
+<p><strong>We have unfortunately been hiding under a rock and do not see the many news articles referencing the recent MOVEit CVE being exploited in the wild. We believe our Windows server may be vulnerable and has recently fallen victim to this compromise. We need to understand this exploit in a bit more detail, confirm the actions of the attacker and retrieve some details so that we can implement them into our SOC environment. We have provided you with a triage of all the necessary artefacts from our compromised Windows server. PS: One of the artifacts is a memory dump, but we forgot to include the vmss file. You might have to go back to basics here&hellip;</strong></p>
+<p>Na podstawie wstępnych informacji wynika, że mamy do czynienia z podatnością CVE-2023-34362. To krytyczna podatność (9.8 w CVSS:3.1) typu SQL Injection. Została wykryta w aplikacji MOVEit Transfer, służącej do transferu plików. Pozwala na ich szyforwanie, używa protokołu FTP oraz SFTP i ma funkcje automatyzujące wymianę plików, umożliwia logowanie zdarzeń i raportowanie. Wykorzystanie podatności umożliwia uzyskanie dostępu do bazy danych MOVEit z poziomu aplikacji webowej bez uwierzytelnienia (złamanie poufności), a następnie modyfikację tabel (złamanie integralności) i samego dostępu (złamanie dostępności).</p>
+<p>Otrzymaliśmy plik zip z materiałami</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_files"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_files_hu_c6c4022737b3eea7.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_files_hu_7a528f0487934f3a.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_files_hu_c96fd9f0675af872.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_files.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_files.png">
+
+  
+</figure>
+
+Plik VMEM (Virtual Memory File) jest dumpem pamięci RAM maszyny wirtualnej, natomiast brakujący plik VMSS (Virtual Machine Suspend State) pozwoliłby na wznowienie maszyny, w dokładnym miejscu gdzie ją wstrzymano.</p>
+<p>Odpalamy naszą maszynę wirtualną Windows 10 i bierzemy się do roboty. Dobrą praktyką jest również stworzyć kopię otrzymanych dowodów - lepiej nie pracować na oryginałach. Sprawdźmy też, czy zachowaliśmy integralność dowodów.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_integrity"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_integrity_hu_a8167699ea4bb721.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_integrity_hu_97b1d0252379ebbf.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_integrity_hu_3352939506501386.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_integrity.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_integrity.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 1 
+    <div id="pytanie-1" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-1" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Name of the ASPX webshell uploaded by the attacker?</strong></p>
+<p>ASPX webshell to malware napisany w technologii ASP.NET, który umożliwia zdalne sterowanie serwerem WWW przez atakującego. Korzystając z narzędzia Autopsy znajdujemy plik tekstowy z logami, najpewniej PowerShella. TA (Threat Actor) najprawdopodobniej pobrał webshell &ldquo;move.aspx&rdquo; mając już zdalny dostęp do serwera. Dodatkowo widzimy, że zmienił webshell z moveit.asp na move.aspx. Możliwe, że pierwszy nie działał.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="webshell_name"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name_hu_786fdfe21ab1bcfe.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name_hu_7570705e74ffcf09.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name_hu_fc1007a7d79164f5.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: move.aspx</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_odp1"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp1_hu_1c908400c0b30b21.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp1_hu_dd31f55d02d73251.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp1_hu_8e41ff184b116db6.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp1.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp1.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 2 
+    <div id="pytanie-2" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-2" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What was the attacker&rsquo;s IP address?</strong></p>
+<p>Przeszukajmy pliki w Autopsy po słowie kluczowym move.aspx. Najprawdopodobniej adresem IP TA jest 10.255.254.3, ale spróbujmy uzyskać szerszy kontekst. Sprawdźmy logi w pliku u_ex230712.log</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_broader_persp"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_broader_persp_hu_17d0a63fc086ac36.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_broader_persp_hu_304213c514bef71c.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_broader_persp_hu_44b6c413c421abcc.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_broader_persp.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_broader_persp.png">
+
+  
+</figure>
+</p>
+<p>Adres IP klienta to ponownie 10.255.254.3. Próbował uzyskać dostęp do webshella przez przeglądarkę Firefox. Zanotujmy timestamp. Zauważmy również, że TA próbował eksploitować podatność już wcześniej (podejrzane pliki guestaccess.aspx, moveit.asp, machine2.aspx) jednak move.aspx pojawia się najrzadziej i na końcu logów. Przeszukajmy logi po adresie IP i zobaczmy kiedy nastąpił pierwszy kontakt TA. Jest to ten sam plik u_ex230712.log</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_begin_scan"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_begin_scan_hu_c816eab596335582.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_begin_scan_hu_5ac286c156561eba.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_begin_scan_hu_261af38bfa0377cf.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_begin_scan.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_begin_scan.png">
+
+  
+</figure>
+</p>
+<p>12 lipca o godz. 10:11:15 UTC atakujący rozpoczął skanowanie za pomocą narzędzia Nmap - z tego samego adresu IP 10.255.254.3.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_small_log"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_small_log_hu_a89e71f03c62cba6.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_small_log_hu_871ebb139d0854b3.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_small_log_hu_d7dab736e0af035d.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_small_log.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_small_log.png">
+
+  
+</figure>
+</p>
+<p>O godz. 10:21:53 TA wysłał żądanie POST do webshella (możliwe, że jakąś komendę, którą wykonał). Serwer zwrócił kod 200. Charakterystyczne dla zapytań POST jest to, że przekazane parametry nie są logowane (chyba, że skonfigurowano inaczej). Wiemy jedynie, że coś przekazano do pliku webshella.</p>
+<p>Mamy kolejną odpowiedź!</p>
+<p><strong>Odpowiedź: 10.255.254.3</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_odp_2"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_2_hu_163c66e048875f6d.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_2_hu_e72550c047b11923.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_2_hu_629540d1359a4d8f.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_2.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_2.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 3 
+    <div id="pytanie-3" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-3" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What user agent was used to perform the initial attack?</strong></p>
+<p>User agent to informacja wysyłana przez klienta w nagłówku HTTP do serwera. Zawiera dane o m.in. używanej przeglądarce, systemie operacyjnym. Widzimy podejrzany ruch wskazujący na użycie skryptu napisanego w Ruby - możliwe, że TA używa Frameworka Metasploit do wykonywania ataku.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="ilketo_big_log"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/ilketo_big_log_hu_6d0f66d8d2ff245e.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/ilketo_big_log_hu_5d0149ba8c5d8b35.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/ilketo_big_log_hu_fadfa69b18800ed5.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/ilketo_big_log.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/ilketo_big_log.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: Ruby</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_odp_3"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_3_hu_ad295d6a16844803.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_3_hu_bb6cca43598ac772.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_3_hu_c63a51bf6e3eb449.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_3.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_3.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 4 
+    <div id="pytanie-4" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-4" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>When was the ASPX webshell uploaded by the attacker?</strong></p>
+<p>Aby zobaczyć kiedy plik został umieszczony na serwerze skorzystamy z odnalezionego pliku bazodanowego $MFT, który zawiera informacje o wszystkich plikach i katalogach systemu - kiedy były tworzone, modyfikowane, zmieniane uprawnienia. Skorzystamy z jednego ze świetnych open-sourcowych narzędzi Erica Zimmermana, znanego amerykańskiego informatyka śledczego, w przeszłości pracującego w FBI - MFTECmd. Jego pakiet &ldquo;EZ tools&rdquo; jest dostępny na GitHubie i służy do analizowania plików/logów Windowsa. Wyeksportujemy plik do CSV i przeanalizujemy zawartość.</p>
+<pre tabindex="0"><code>.\MFTECmd.exe -f &#34;&lt;lokalizacja $MFT&gt;&#34; --csv &#34;&lt;lokalizacja docelowa pliku CSV&gt;&#34; --csvf &lt;nazwa&gt;.csv
+</code></pre><p>Szukamy słowa kluczowego &ldquo;move.aspx&rdquo; i znajdujemy dokładną datę - 12.07.2023 11:24:30. Został utworzony w <strong>.\MOVEitTransfer\wwwroot</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="move_aspx_created"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_aspx_created_hu_92d5267d15096209.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_aspx_created_hu_be56b9a62b32e372.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_aspx_created_hu_ef00ca230d0c2e46.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_aspx_created.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_aspx_created.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: 12.07.2023 11:24:30</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_odp_4"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_4_hu_e23c3a5057dffb89.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_4_hu_2583610dfbc4f1e5.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_4_hu_a2dd1d77914d4e5e.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_4.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_4.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 5 
+    <div id="pytanie-5" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-5" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>The attacker uploaded an ASP webshell which didn&rsquo;t work, what is its filesize in bytes?</strong></p>
+<p>Wróćmy do pliku ConsoleHost_history.txt. TA próbował uploadować plik moveit.asp, ale później wgrał move.aspx - ten pierwszy nie działał, co potwierdzają poniższe logi z pliku u_ex230712.log i kod 404. Move.aspx zwrócił kod 200 (sukces).</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="move_it_404"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_it_404_hu_f33f7b74c0bdd97c.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_it_404_hu_f79b44789fe1e385.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_it_404_hu_d580eb832723fe8c.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_it_404.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_it_404.png">
+
+  
+</figure>
+</p>
+<p>wielkość niedziałającego pliku moveit.asp jest widoczna w $MFT</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="move_asp_filesize"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_asp_filesize_hu_d37e7c2d3a6f82a9.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_asp_filesize_hu_42b6ea9e11ea8da0.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_asp_filesize_hu_fa1ae73c48d018f9.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_asp_filesize.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/move_asp_filesize.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: 1362</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="moveit_size"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/moveit_size_hu_9dea938ffb9657d1.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/moveit_size_hu_16d59bb1938c4578.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/moveit_size_hu_388b81f4b9ab3c1b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/moveit_size.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/moveit_size.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 6 
+    <div id="pytanie-6" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-6" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Which tool did the attacker use to initially enumerate the vulnerable server?</strong></p>
+<p>Odpowiedź już znamy po wcześniejszej analizie.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="scanning_tool"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/scanning_tool_hu_1c822488f17572fb.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/scanning_tool_hu_f81c1275975cd2ed.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/scanning_tool_hu_91651d3c5151582.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/scanning_tool.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/scanning_tool.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: Nmap</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_nmap_scan"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_nmap_scan_hu_fe5766aabd72fedc.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_nmap_scan_hu_e3051143d7af3fd0.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_nmap_scan_hu_9a52804b8ceec2af.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_nmap_scan.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_nmap_scan.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 7 
+    <div id="pytanie-7" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-7" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>We suspect the attacker may have changed the password for our service account. Please confirm the time this occurred (UTC)</strong></p>
+<p>Jednym z cennych plików, które otrzymaliśmy do analizy to dziennik zdarzeń Windowsa, a konkretnie Security.evtx. Filtrujemy logi po <strong>Event ID 4723 - An attempt was made to change an account&rsquo;s password</strong>. Niestety nic nie ma.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_change_pass_empty"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_change_pass_empty_hu_80407cf49929b04.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_change_pass_empty_hu_91fcfdd32a82553d.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_change_pass_empty_hu_ec2e2aa99da35b8b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_change_pass_empty.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_change_pass_empty.png">
+
+  
+</figure>
+</p>
+<p>Spróbujmy poszukać po <strong>Event ID 4724 - An attempt was made to reset an account&rsquo;s password</strong>. Mamy 8 logów z czego najpóźniejszy jest specyficzny - konto usługowe &ldquo;moveitsvc&rdquo; zmieniło własne hasło - jest to najprawdopodobniej skompromitowane przez atakującego konto. Mamy kolejną odpowiedź.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="pass_change"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/pass_change_hu_7f551286eb0f294e.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/pass_change_hu_f861794c47b2922b.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/pass_change_hu_e8228554d6b61167.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/pass_change.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/pass_change.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: 12/07/2023 11:09:27</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketio_odp_7"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketio_odp_7_hu_bc178fb9a734c3aa.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketio_odp_7_hu_abad7ba5ea1a6226.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketio_odp_7_hu_868b84603ed184cd.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketio_odp_7.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketio_odp_7.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 8 
+    <div id="pytanie-8" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-8" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Which protocol did the attacker utilize to remote into the compromised machine?</strong></p>
+<p>Ponownie użyjemy jednego z narzędzi EZ Tools. EvtxECmd pozwoli nam na eksportowanie dziennika do pliku csv tylko z logami zdarzeń 4624, 4625, 4778, 4779.</p>
+<p>4624 - An account was successfully logged on
+4625 - An account failed to log on
+4778 - A session was reconnected to a Window Station
+4779 - A session was disconnected from a Window Station</p>
+<p>Sprawdzimy wszelkie zdarzenia związane z logowaniem na konto w Windows.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="event_cmd_export"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_cmd_export_hu_e3a3046cf63c95f1.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_cmd_export_hu_3dcc4a042027729e.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_cmd_export_hu_35a3bc212dba8786.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_cmd_export.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_cmd_export.png">
+
+  
+</figure>
+</p>
+<p>Filtrujemy po <strong>Logon Type 10 -  user logged on to this computer remotely using Terminal Services or Remote Desktop (dokumentacja Microsoft)</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="logon_type_10"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/logon_type_10_hu_24126ca30d25bf0f.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/logon_type_10_hu_b8d2d191e4116432.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/logon_type_10_hu_5616a0eb66ef5632.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/logon_type_10.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/logon_type_10.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="remote_acc_pt1"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt1_hu_7613c53aaf5ecf7f.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt1_hu_be8336d282f41548.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt1_hu_ef6eafb1e72cae31.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt1.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt1.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="remote_acc_pt2"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt2_hu_bd6dc39005ab29cd.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt2_hu_73d6a81f4c81a956.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt2_hu_12af76afc2421cb3.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt2.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/remote_acc_pt2.png">
+
+  
+</figure>
+</p>
+<p>Potwierdzamy, że logowanie miało miejsce. Host TA (10.255.254.3) logował się na konto moveitsvc przez RDP.</p>
+<p><strong>Odpowiedź: RDP</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_answ_8"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_answ_8_hu_5d11df7deeaf96a8.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_answ_8_hu_8235a39a80b8c351.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_answ_8_hu_6329f1b080a53dee.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_answ_8.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_answ_8.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 9 
+    <div id="pytanie-9" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-9" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>Please confirm the date and time the attacker remotely accessed the compromised machine?</strong></p>
+<p>Co ciekawe z jakiegoś powodu te same zdarzenia różnią się 1 sekundą - w pliku CSV jest to 11:11:19, a w Event Viewer to 11:11:18. Ta druga jest najwyraźniej poprawna dla HTB.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="rdp_time"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/rdp_time_hu_12dc98e32679a6d9.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/rdp_time_hu_eca05a53a4b47c1c.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/rdp_time_hu_3f4556d55c98088b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/rdp_time.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/rdp_time.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="event_file_diff_time"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_file_diff_time_hu_5e8be6ea8893bbe5.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_file_diff_time_hu_b13f0698bfd1a40e.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_file_diff_time_hu_153492c5f42e00f1.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_file_diff_time.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/event_file_diff_time.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: 12.07.2023 11:11:18</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_odp_9"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_9_hu_262341d3b9e5b766.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_9_hu_eb2a0476a12e4ec5.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_9_hu_bb18439e1db77d24.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_9.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_9.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 10 
+    <div id="pytanie-10" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-10" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What was the useragent that the attacker used to access the webshell?</strong></p>
+<p>Wiemy, że użytym webshellem jest &ldquo;move.aspx&rdquo;. Wracamy do pliku u_ex230712.log i szukamy słowa kluczowego.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="webshell_access"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_access_hu_4dcc2e72e0a956c9.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_access_hu_32745e81d60c2507.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_access_hu_51ce4ad5b81d8345.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_access.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_access.png">
+
+  
+</figure>
+</p>
+<p>TA korzystał z graficznego środowiska okien X11, 64-bitowego systemu Linux, silnika renderującego Gecko (na której opiera się Firefox) w wersji 102.0 i przeglądarki Firefox w wersji 102.0</p>
+<p>Swoją drogą, zastanawialiście się czasami czemu w nagłówkach HTTP jest Mozilla/5.0, mimo że klient nie był Firefoxem a np. Chrome? Okazuje się, że jest to relikt lat 90. i &ldquo;wojen przeglądarkowych&rdquo;. W Internecie wtedy królował Netscape Navigator, który wspierał tzw. ramki. Ogólnie pozwalały podzielić stronę internetową na kilka części, z których każda wyświetlała osobny plik HTML. Dzięki temu twórcy stron mogli przygotować jeden plik zawierający menu z odnośnikami do podstron i załadować go w każdej stronie jako osobną stałą sekcję. W ten sposób, zamiast powielać kod menu w każdym pliku, wystarczyło zmienić tylko ten jeden plik z menu, a aktualizacja pojawiała się automatycznie na wszystkich podstronach. Były to czasy, gdy standardy dopiero raczkowały, a przeglądarki internetowe znacząco się od siebie różniły. W związku z tym narodziła się praktyka tzw. user agent sniffing - przeglądarki wysyłały w nagłówku HTTP informacje o sobie, a serwery na tej podstawie odsyłały odpowiednią wersję kodu HTML strony, aby zoptymalizować jej wyświetlanie na konkretnej przeglądarce.</p>
+<p>Przeglądarka Netscape, będąca wówczas liderem rynku, identyfikowała się jako &ldquo;Mozilla&rdquo; - nazwa ta pochodziła od połączenia słów Mosaic (pierwsza popularna graficzna przeglądarka) i Godzilla. W tym samym czasie Microsoft wprowadził Internet Explorer, również obsługujący ramki - jednak ze względu na jego małą popularność, wiele serwerów nie rozpoznawało go jako przeglądarki zdolnej do obsługi nowoczesnych funkcji. W efekcie użytkownicy Internet Explorera otrzymywali uproszczone wersje stron lub takie, które nie działały poprawnie.</p>
+<p>Microsoft zdecydował się na kontrowersyjny krok - Internet Explorer również zaczął wysyłać w nagłówku identyfikator &ldquo;Mozilla&rdquo;. Dzięki temu serwery „myślały”, że mają do czynienia z przeglądarką Netscape i przesyłały pełną wersję strony. Wkrótce inne przeglądarki poszły tą samą drogą, co sprawiło, że do dziś w nagłówkach User-Agent znaleźć można odwołanie do &ldquo;Mozilli&rdquo;, niezależnie od faktycznej przeglądarki.</p>
+<p><strong>Odpowiedź: Mozilla/5.0+(X11;+Linux+x86_64;+rv:102.0)+Gecko/20100101+Firefox/102.0</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_q_10"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_10_hu_b699e3bc0242f479.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_10_hu_81601155346ede98.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_10_hu_aa260a32af403c77.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_10.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_10.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 11 
+    <div id="pytanie-11" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-11" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What is the inst ID of the attacker?</strong></p>
+<p>Jednym z plików, które otrzymaliśmy jest zestaw instrukcji SQL. Uruchomimy lokalny serwer SQL i sprawdzimy zawartość.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="creating_schema"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/creating_schema_hu_88dd9263b47bdca2.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/creating_schema_hu_586d3570af741e82.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/creating_schema_hu_86b18352dac8dc75.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/creating_schema.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/creating_schema.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="data_import"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/data_import_hu_eb02db82fab9296b.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/data_import_hu_c1a252d864a2aebd.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/data_import_hu_4645943488fb3e61.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/data_import.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/data_import.png">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="importing_data"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/importing_data_hu_b17fd1bd43ab8c9d.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/importing_data_hu_45ba22fabf87442.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/importing_data_hu_96e71ed69703b32e.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/importing_data.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/importing_data.png">
+
+  
+</figure>
+</p>
+<p>Sprawdzimy tabelę &ldquo;log&rdquo;</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="new_tables"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/new_tables_hu_e863bfd054ab7d9.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/new_tables_hu_604d77fde96ac1e8.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/new_tables_hu_ee1e5329c1a52397.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/new_tables.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/new_tables.png">
+
+  
+</figure>
+
+
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="inst_id"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/inst_id_hu_a26ea055ba461278.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/inst_id_hu_d82a369ff9a32641.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/inst_id_hu_10313ce46165b369.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/inst_id.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/inst_id.png">
+
+  
+</figure>
+</p>
+<p>Widzimy utworzone konta gościa oraz adres IP atakującego.</p>
+<p><strong>Odpowiedź: 1234</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_q_11"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_11_hu_ebd25b484070cf24.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_11_hu_6f384f78a64c1de.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_11_hu_617372dd3787537b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_11.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_11.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 12 
+    <div id="pytanie-12" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-12" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What command was run by the attacker to retrieve the webshell?</strong></p>
+<p>Wróćmy do pliku ConsoleHost_history.txt - widzimy, że TA po uzyskaniu zdalnego dostępu wykonał polecenie wget, aby dostać się do webshella.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="webshell_name"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name_hu_786fdfe21ab1bcfe.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name_hu_7570705e74ffcf09.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name_hu_fc1007a7d79164f5.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_name.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: <code>wget http://10.255.254.3:9001/move.aspx -OutFile move.aspx</code></strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_q_12"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_12_hu_fe3e52e00ef45bdc.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_12_hu_dc59a1463d2e44d6.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_12_hu_e52387fcc3cac38b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_12.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_12.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 13 
+    <div id="pytanie-13" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-13" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What was the string within the title header of the webshell deployed by the TA?</strong></p>
+<p>Przeszukajmy dump pamięci RAM .vmem. Niestety nie mamy pliku .vmss, a bez tego Volatility 3 nie zadziała. Zdecydowałem się więc na użycie strings.exe z pakietu Sysinternals Windowsa.</p>
+<p><code>.\strings.exe C:\Users\analyst\Desktop\iliketo\I-like-to-27a787c5.vmem | Select-String -Pattern &quot;&lt;title&gt;&quot; -Context 20,20</code></p>
+<p>Polecenie przeszuka linijki ze słowem kluczowym oraz 20 linijkami powyżej i poniżej, dla szerszego kontekstu. Po analizie po słowie &ldquo;title&rdquo; mamy odpowiedź.</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="webshell_title"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_title_hu_1d206b85d56ca980.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_title_hu_1838a9b843d73180.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_title_hu_5b735c7dc6c0f7e1.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_title.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/webshell_title.png">
+
+  
+</figure>
+</p>
+<p><strong>Odpowiedź: awen asp.net webshell</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_q_13"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_13_hu_7bcb836e5beaf2e1.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_13_hu_eb83e7aabaf938cf.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_13_hu_5e5ff24f0205ff2b.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_13.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_q_13.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Pytanie 14 
+    <div id="pytanie-14" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#pytanie-14" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p><strong>What did the TA change the our moveitsvc account password to?</strong></p>
+<p>Ponownie poszukamy odpowiedzi w dumpie RAM-u. Skorzystamy ze wskazówki w pytaniu i użyjemy słowa kluczowego moveitsvc. Przeniesiemy się też na Kali Linuxa (WSL), ponieważ z jakichś powodów strings z Sysinternals nie mi wypluwał żadnych wyników.</p>
+<p><code>strings I-like-to-27a787c5.vmem | grep moveitsvc &gt; moveitsvc-result.txt</code></p>
+<p>Po dłuższych poszukiwaniach na samym końcu pliku mamy to czego chcieliśmy</p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="wsl_search"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/wsl_search_hu_ee5cd4ae327ec28d.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/wsl_search_hu_d6e79053e8c8dbbf.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/wsl_search_hu_bf9612b89ef85dff.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/wsl_search.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/wsl_search.png">
+
+  
+</figure>
+</p>
+<p>TA użył narzędzia net.</p>
+<p><strong>Odpowiedź: 5trongP4ssw0rd</strong></p>
+<p>
+
+
+
+
+
+
+<figure>
+      <img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="low"
+    alt="iliketo_odp_14"
+    srcset="
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_14_hu_3f5592b091eeb5c3.png  330w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_14_hu_599c92530c7f70ad.png  660w,
+      /CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_14_hu_65caff205f5f6eb3.png 1280w
+    "
+    data-zoom-src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_14.png"
+    src="/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/images/iliketo_odp_14.png">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Podsumowanie 
+    <div id="podsumowanie" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#podsumowanie" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Na koniec uporządkujmy działania TA odtwórzmy po kolei zdarzenia.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Data i godzina</th>
+          <th style="text-align: center">Opis</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">12/07/2013 10:11:15</td>
+          <td style="text-align: center">TA rozpoczął skanowanie narzędziem Nmap</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">12/07/2023 10:21:53</td>
+          <td style="text-align: center">Pierwsza próba wykorzystania podatności i użycia webshella - POST do /machine2.aspx</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">12/07/2023 11:09:27</td>
+          <td style="text-align: center">Zmiana hasła konta usługowego &ldquo;moveitsvc&rdquo; przez TA</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">12.07.2023 11:11:18</td>
+          <td style="text-align: center">Uzyskanie zdalnego dostępu do hosta przez TA (RDP na konto moveitsvc)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">12/07/2023 11:18:36</td>
+          <td style="text-align: center">Nieudana próba uzyskania dostępu do webshella moveit.asp</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">12/07/2023 11:24:30</td>
+          <td style="text-align: center">Upload nowego webshella move.aspx do .\MOVEitTransfer\wwwroot</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">12/07/2023 11:24:47</td>
+          <td style="text-align: center">Wykonanie zapytania POST do endpointu /move.aspx</td>
+      </tr>
+  </tbody>
+</table>
+
+          
+          
+          
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/CyberZgroza/js/page.min.407e5b2727c1f241c95d53db24c776bea71bfc18e09511b815d669ad8caca6e9e18a53864ad364b1ccccfa2f2956768d33cfe193bfb64d3406f3b5ece354ba57.js"
+          integrity="sha512-QH5bJyfB8kHJXVPbJMd2vqcb/BjglRG4FdZprYyspunhilOGStNksczM&#43;i8pVnaNM8/hk7&#43;2TTQG87Xs41S6Vw=="
+          data-oid="views_posts\HTB_sherlock_intro_to_blue_4\index.md"
+          data-oid-likes="likes_posts\HTB_sherlock_intro_to_blue_4\index.md"></script>
+      
+
+    </section>
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group mr-3" href="/CyberZgroza/posts/siem_homelab3/">
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Budowanie SIEM w Proxmox - Część III</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2025-09-04T00:00:00&#43;00:00">4 September 2025</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group ml-3" href="/CyberZgroza/posts/htb_sherlock_phishnet/">
+              <span class="flex flex-col">
+                <span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Hack The Box Sherlock - PhishNet</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2025-09-11T00:00:00&#43;00:00">11 September 2025</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a
+    href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top"
+    title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2025
+          CyberZgroza
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+      </p>
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script> 
+  
+  <script
+    type="text/javascript"
+    src="/CyberZgroza/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-index-500"
+  data-url="http://localhost:1313/CyberZgroza/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)">
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

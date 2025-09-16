@@ -1,9 +1,12 @@
 ---
-title: "Budowanie SIEM w Proxmox - Część III"
-date: 2025-09-02
-tags: ["blueteam", "siem", "homelab"]
+title: Budowanie SIEM w Proxmox - Część III
+date: 2025-09-04
+tags:
+  - blueteam
+  - siem
+  - homelab
 showSummary: true
-summary: "Instalacja i konfiguracja Security Onion. Port mirroring w Proxmox"
+summary: Instalacja i konfiguracja Security Onion. Port mirroring w Proxmox
 draft: false
 ---
 

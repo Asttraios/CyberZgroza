@@ -3,10 +3,9 @@ title: "Budowanie SIEM w Proxmox - Część I"
 date: 2025-09-02
 tags: ["blueteam", "siem", "homelab"]
 showSummary: true
-summary: "Początek konfiguracji. Wybór hardware\'u i hypervisora"
+summary: "Początek konfiguracji. Wybór hardware'u i hypervisora"
 draft: false
 ---
-
 **Security Information and Event Management** - system do centralnego gromadzenia, zarządzania, analizowania i korelacji logów oraz incydentów bezpieczeństwa. To dzięki niemu zespół SOC jest w stanie odpowiednio szybko i precyzyjnie zareagować na zagrożenia w infrastrukturze IT. A myśleliście, żeby postawić takie coś u siebie - korzystając jedynie z darmowych i open-sourcowych narzędzi? W tej mini serii pokażę jak w prosty sposób stworzyć własny wirtualny SIEM sandbox w Proxmox bazujący na Security Onion. Od zera.
 
 ## Sprzęt
