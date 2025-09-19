@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTB on </title>
+    <link>http://localhost:1313/CyberZgroza/tags/htb/</link>
+    <description>Recent content in HTB on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pl</language>
+    <copyright>© 2025 CyberZgroza</copyright>
+    <lastBuildDate>Mon, 15 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/tags/htb/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hack The Box Sherlock - meerkat</title>
+      <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/</link>
+      <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/</guid>
+      <description>Analiza Sherlocka &amp;ldquo;Meerkat&amp;rdquo; z HTB</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/featured.png" />
+    </item>
+    
+    <item>
+      <title>Hack The Box Sherlock - PhishNet</title>
+      <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/</link>
+      <pubDate>Thu, 11 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/</guid>
+      <description>Analiza maila phishingowego - &amp;ldquo;PhishNet&amp;rdquo; z HTB</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/featured.png" />
+    </item>
+    
+    <item>
+      <title>Hack The Box Sherlock - i-like-to</title>
+      <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/</link>
+      <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/</guid>
+      <description>Analiza Sherlocka &amp;ldquo;i-like-to&amp;rdquo; z HTB</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/featured.png" />
+    </item>
+    
+  </channel>
+</rss>

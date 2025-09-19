@@ -5,48 +5,36 @@
     <link>http://localhost:1313/CyberZgroza/tags/</link>
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <managingEditor>cyberzgroza@gmail.com (CyberZgroza)</managingEditor>
-    <webMaster>cyberzgroza@gmail.com (CyberZgroza)</webMaster>
+    <language>pl</language>
     <copyright>© 2025 CyberZgroza</copyright>
     <lastBuildDate>Mon, 15 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Blueteam</title>
-      <link>http://localhost:1313/CyberZgroza/tags/blueteam/</link>
+      <title>DFIR</title>
+      <link>http://localhost:1313/CyberZgroza/tags/dfir/</link>
       <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/tags/blueteam/</guid>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/dfir/</guid>
       <description></description>
       
     </item>
     
     <item>
-      <title>Homelab</title>
-      <link>http://localhost:1313/CyberZgroza/tags/homelab/</link>
+      <title>HTB</title>
+      <link>http://localhost:1313/CyberZgroza/tags/htb/</link>
       <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/tags/homelab/</guid>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/htb/</guid>
       <description></description>
       
     </item>
     
     <item>
-      <title>Siem</title>
-      <link>http://localhost:1313/CyberZgroza/tags/siem/</link>
+      <title>Wireshark</title>
+      <link>http://localhost:1313/CyberZgroza/tags/wireshark/</link>
       <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/tags/siem/</guid>
-      <description></description>
       
-    </item>
-    
-    <item>
-      <title>Forensics</title>
-      <link>http://localhost:1313/CyberZgroza/tags/forensics/</link>
-      <pubDate>Thu, 11 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
-      <guid>http://localhost:1313/CyberZgroza/tags/forensics/</guid>
+      <guid>http://localhost:1313/CyberZgroza/tags/wireshark/</guid>
       <description></description>
       
     </item>
@@ -55,8 +43,58 @@
       <title>Phishing</title>
       <link>http://localhost:1313/CyberZgroza/tags/phishing/</link>
       <pubDate>Thu, 11 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/tags/phishing/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>http://localhost:1313/CyberZgroza/tags/windows/</link>
+      <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/windows/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Homelab</title>
+      <link>http://localhost:1313/CyberZgroza/tags/homelab/</link>
+      <pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/homelab/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Proxmox</title>
+      <link>http://localhost:1313/CyberZgroza/tags/proxmox/</link>
+      <pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/proxmox/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>SIEM</title>
+      <link>http://localhost:1313/CyberZgroza/tags/siem/</link>
+      <pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/siem/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>SOC</title>
+      <link>http://localhost:1313/CyberZgroza/tags/soc/</link>
+      <pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/CyberZgroza/tags/soc/</guid>
       <description></description>
       
     </item>

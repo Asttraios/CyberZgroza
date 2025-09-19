@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on </title>
+    <title>Wpisy on </title>
     <link>http://localhost:1313/CyberZgroza/posts/</link>
-    <description>Recent content in Posts on </description>
+    <description>Recent content in Wpisy on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <managingEditor>cyberzgroza@gmail.com (CyberZgroza)</managingEditor>
-    <webMaster>cyberzgroza@gmail.com (CyberZgroza)</webMaster>
+    <language>pl</language>
     <copyright>© 2025 CyberZgroza</copyright>
     <lastBuildDate>Mon, 15 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,60 +13,60 @@
       <title>Hack The Box Sherlock - meerkat</title>
       <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/</link>
       <pubDate>Mon, 15 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/</guid>
       <description>Analiza Sherlocka &amp;ldquo;Meerkat&amp;rdquo; z HTB</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_meerkat/featured.png" />
     </item>
     
     <item>
       <title>Hack The Box Sherlock - PhishNet</title>
       <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/</link>
       <pubDate>Thu, 11 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/</guid>
       <description>Analiza maila phishingowego - &amp;ldquo;PhishNet&amp;rdquo; z HTB</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/featured.png" />
     </item>
     
     <item>
       <title>Hack The Box Sherlock - i-like-to</title>
       <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/</link>
       <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/</guid>
       <description>Analiza Sherlocka &amp;ldquo;i-like-to&amp;rdquo; z HTB</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_intro_to_blue_4/featured.png" />
     </item>
     
     <item>
       <title>Budowanie SIEM w Proxmox - Część III</title>
       <link>http://localhost:1313/CyberZgroza/posts/siem_homelab3/</link>
       <pubDate>Thu, 04 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab3/</guid>
       <description>Instalacja i konfiguracja Security Onion. Port mirroring w Proxmox</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/siem_homelab3/featured.png" />
     </item>
     
     <item>
       <title>Budowanie SIEM w Proxmox - Część II</title>
       <link>http://localhost:1313/CyberZgroza/posts/siem_homelab2/</link>
       <pubDate>Wed, 03 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab2/</guid>
       <description>Stworzenie topologii logicznej i konfiguracja VLAN-ów w pfSense</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/siem_homelab2/featured.png" />
     </item>
     
     <item>
       <title>Budowanie SIEM w Proxmox - Część I</title>
       <link>http://localhost:1313/CyberZgroza/posts/siem_homelab/</link>
       <pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/siem_homelab/</guid>
       <description>Początek konfiguracji. Wybór hardware&amp;rsquo;u i hypervisora</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/siem_homelab/featured.png" />
     </item>
     
   </channel>

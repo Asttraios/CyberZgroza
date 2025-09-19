@@ -1,10 +1,7 @@
 ---
 title: Hack The Box Sherlock - meerkat
 date: 2025-09-15
-tags:
-  - blueteam
-  - siem
-  - homelab
+tags: ["HTB", "DFIR", "Wireshark"]
 showSummary: true
 summary: Analiza Sherlocka "Meerkat" z HTB
 draft: false

@@ -5,9 +5,7 @@
     <link>http://localhost:1313/CyberZgroza/tags/phishing/</link>
     <description>Recent content in Phishing on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <managingEditor>cyberzgroza@gmail.com (CyberZgroza)</managingEditor>
-    <webMaster>cyberzgroza@gmail.com (CyberZgroza)</webMaster>
+    <language>pl</language>
     <copyright>© 2025 CyberZgroza</copyright>
     <lastBuildDate>Thu, 11 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/CyberZgroza/tags/phishing/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,10 +13,10 @@
       <title>Hack The Box Sherlock - PhishNet</title>
       <link>http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/</link>
       <pubDate>Thu, 11 Sep 2025 00:00:00 +0000</pubDate>
-      <author>cyberzgroza@gmail.com (CyberZgroza)</author>
+      
       <guid>http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/</guid>
       <description>Analiza maila phishingowego - &amp;ldquo;PhishNet&amp;rdquo; z HTB</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/CyberZgroza/posts/htb_sherlock_phishnet/featured.png" />
     </item>
     
   </channel>

@@ -1,10 +1,7 @@
 ---
 title: Hack The Box Sherlock - PhishNet
 date: 2025-09-11
-tags:
-  - blueteam
-  - phishing
-  - forensics
+tags: ["HTB", "DFIR", "phishing"]
 showSummary: true
 summary: Analiza maila phishingowego - "PhishNet" z HTB
 draft: false

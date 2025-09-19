@@ -1,10 +1,7 @@
 ---
 title: Budowanie SIEM w Proxmox - Część II
 date: 2025-09-03
-tags:
-  - blueteam
-  - siem
-  - homelab
+tags: ["SIEM", "Proxmox", "homelab", "SOC"]
 showSummary: true
 summary: Stworzenie topologii logicznej i konfiguracja VLAN-ów w pfSense
 draft: false

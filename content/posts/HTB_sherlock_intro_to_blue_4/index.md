@@ -1,10 +1,7 @@
 ---
 title: Hack The Box Sherlock - i-like-to
 date: 2025-09-07
-tags:
-  - blueteam
-  - siem
-  - homelab
+tags: ["HTB", "DFIR", "Windows"]
 showSummary: true
 summary: Analiza Sherlocka "i-like-to" z HTB
 draft: false
